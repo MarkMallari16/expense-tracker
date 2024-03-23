@@ -3,21 +3,21 @@ import React, { useState } from 'react';
 const cardData = [
   {
     id: 1,
-    content: 'Weekly Expenses',
+    content: 'Weekly Income',
     value: '15,000',
     bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'], // Dark, Light, Lighter
     textColor: ['text-white', 'text-gray-300', 'text-gray-400'], // Dark, Light, Lighter text colors
   },
   {
     id: 2,
-    content: 'Monthly Expenses',
+    content: 'Monthly Income',
     value: '25,000',
     bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'],
     textColor: ['text-white', 'text-gray-300', 'text-gray-400'],
   },
   {
     id: 3,
-    content: 'Yearly Expenses',
+    content: 'Yearly Income',
     value: '55,000',
     bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'],
     textColor: ['text-white', 'text-gray-300', 'text-gray-400'],

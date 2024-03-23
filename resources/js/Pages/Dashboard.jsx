@@ -6,7 +6,11 @@ import BalanceCard from "@/Components/BalanceCard";
 import Category from "@/Components/Category/Category";
 import { useState } from "react";
 import Graphs from "@/Components/Category/Graphs";
+
+
 import Card from "@/Components/Card";
+
+
 import Transaction from "@/Components/Transaction/Transaction";
 import {
     Wallet,
