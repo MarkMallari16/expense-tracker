@@ -5,7 +5,7 @@ import { Inertia } from "@inertiajs/inertia";
 function Category(props) {
     function formatReadableDate(dateString) {
 // Parse the date string and format it
-        return format(new Date(dateString), "MMMM d, yyyy");
+        return format(new Date(dateString), "MMMM d, yyyy" );
     }
 
 // Example usage:
@@ -59,13 +59,13 @@ function Category(props) {
             const response = await Inertia.post(route('goals.addFunds'), {
                 goalId: fundsModal.goal.id,
                 balance: balance,
-            }); 
-            
-            
-    
+            });
+
+
+
             // Assuming the response includes the updated goal
             const updatedGoal = response.props.goals.find(g => g.id === fundsModal.goal.id);
-            setFundsModal({ ...fundsModal, goal: updatedGoal }); 
+            setFundsModal({ ...fundsModal, goal: updatedGoal });
             setFundsModal({ show: false, goal: null }); // Close the modal
         } catch (error) {
             console.error("Error adding funds:", error);
@@ -84,18 +84,20 @@ function Category(props) {
     return (
         <div className="w-full mx-auto bg-white h-22  py-2 sm:rounded-md">
             <div className="border-b-2 px-2 border-[#fafafa] mb-3">
-                <p className="text-xl">Goals</p>
+                <p className="text-xl">Category</p>
             </div>
             <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
-                <div className="flex" onClick={() => setShowModal(true)}>
+               <div className="flex items-center">
+               <div className="" onClick={() => setShowModal(true)}>
                     <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-orange-200">
                         <span className="text-4xl">+</span>
                     </div>
-                    <div className="w-20 py-2 px-2">
-                        <p className="text-xs font-bold">Add New Goal</p>
-                    </div>
-                </div>
 
+                </div>
+                <div className="w-50 py-2 px-2">
+                        <p className="text-lg font-bold">Add Category</p>
+                </div>
+               </div>
                 {goals?.map((goal) => (
                     <div className="flex" key={goal.id}  onClick={() => handleGoalClick(goal)}>
                         <div className="w-fit h-fit rounded-full flex items-center justify-center cursor-pointer bg-blue-800">

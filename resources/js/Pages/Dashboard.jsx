@@ -46,7 +46,12 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
         category: "",
         price: "",
     });
+    const wallet = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.wallet );
+    const incomeData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.totalIncome );
+    const expenseData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.expense);
 
+
+    console.log(wallet);
 
     const submit = (e) => {
         e.preventDefault();
@@ -76,7 +81,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 Wallet
                             </p>
                             <h5 className="text-white font-bold text-2xl px-2">
-                                ₱{finance[0]?.wallet !== undefined ? finance[0]?.wallet : 0}
+                                {wallet !== undefined ? wallet : 0}
                             </h5>
                             {show && (
                                 <div className="w-20 h-12 bg-white absolute top-10 left-32">
@@ -101,7 +106,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 Income
                             </p>
                             <h5 className="text-[#020826] font-bold text-2xl px-2">
-                                ₱{finance[0]?.totalIncome ? finance[0]?.totalIncome : 0}
+                                {incomeData ? incomeData : 0}
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
@@ -119,7 +124,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 Expenses
                             </p>
                             <h5 className="text-[#932b2b] font-bold text-2xl px-2">
-                                ₱{finance[0]?.expense !== undefined ? finance[0]?.expense : 0 }
+                                {expenseData !== undefined ? expenseData : 0 }
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">

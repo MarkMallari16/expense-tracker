@@ -70,17 +70,10 @@ Route::resource('expenses', ExpenseController::class)
 
 
 // expense page route
-Route::get('/expense', [ExpenseController::class, 'expensePage'])->middleware(['auth', 'verified'])->name("expense");
-
-Route::get('/expense', function () {
-    return Inertia::render('Expense');
-})->middleware(['auth', 'verified'])->name("expense");
+Route::get('/expense', [ExpenseController::class, 'expensePage'])->middleware(['auth', 'verified'])->name("expense");;
 
 
 require __DIR__ . '/auth.php';
 
 
 //incomepage.jsx route altering incomepage.jsx
-Route::get('/income', function () {
-    return Inertia::render('IncomeFolder/IncomePage');
-})->name('income');

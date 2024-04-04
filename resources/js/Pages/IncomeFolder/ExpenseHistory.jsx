@@ -43,9 +43,7 @@ function ExpenseHistory() {
   return (
     <div>
       <div className="flex mb-4 w-full text-center p-5 bg-blue-800 text-white rounded">
-        <div className='w-[22%] pt-2'>
-          <Download className="mr-2" size={24} />
-        </div>
+
         <div className="flex-grow">
           <div className="relative w-full max-w-5xl">
             <button

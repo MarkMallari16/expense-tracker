@@ -27,13 +27,15 @@ function ExpenseHistory({expenses}) {
   };
 
   console.log(expenses)
-  const filteredHistory = history.filter((item) => {
+  const filteredHistory = history && Array.isArray(history) ?
+  history.filter((item) => {
     const searchMatch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.category.toLowerCase().includes(searchQuery.toLowerCase());
     return searchMatch;
   }).filter((item) => {
     const categoryMatch = selectedFilters.length === 0 || selectedFilters.includes(item.category);
     return categoryMatch;
-  });
+  }) : [];
+
 
   return (
     <div>
@@ -78,7 +80,7 @@ function ExpenseHistory({expenses}) {
       </div>
       <div className="flex flex-col items-center justify-top p-4 text-black bg-white rounded shadow">
         <div className="w-full">
-          {expenses.map((item) => (
+          {expenses?.map((item) => (
             <div key={item.id} className="mb-4 p-4 bg-gray-100 rounded shadow flex justify-between">
               <div className="flex flex-col">
               <p className="text-md font-bold text-gray-600 mb-auto">{item.title}</p>

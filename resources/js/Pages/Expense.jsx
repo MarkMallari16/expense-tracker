@@ -5,7 +5,7 @@ import { Bar, Pie } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import RecurringExpenses from './RecurringExpenses'; // Make sure the path is correct
 import { Reorder } from 'framer-motion';
-
+import ExpenseCalender from './Profile/ExpenseCalender';
 
 // the drop down icons where the download icon is direct imported so it cant have function
 import { Search } from 'lucide-react';
@@ -92,10 +92,7 @@ function Expense({auth, expenses}) {
 
 
       {/* Section 3 bar */}
-      <div className="p-4 text-white bg-white-500 rounded shadow h-80">
-      <Bar data={chartData} options={{ responsive: true }} />
 
-      </div>
 
       {/* Section 4 pie */}
       <div className="flex items-center justify-center p-4 text-white bg-white-500 rounded shadow h-80">
@@ -104,6 +101,7 @@ function Expense({auth, expenses}) {
     <Pie data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
   </div>
     </div>
+    <ExpenseCalender expenses={expenses}/>
     </div>
     {/* Column for Sections 5 & 6 */}
 
@@ -166,7 +164,7 @@ function Expense({auth, expenses}) {
                                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                     id="grid-city"
                                                     type="text"
-                                                    placeholder="Albuquerque"
+                                                    placeholder="ex. Jobeeee"
                                                     onChange={(e) =>
                                                         setData(
                                                             "title",
