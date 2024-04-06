@@ -236,11 +236,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                     id="grid-city"
                                                     type="text"
-<<<<<<< HEAD
-                                                    placeholder="ex.Chowking"
-=======
                                                     placeholder="House"
->>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
                                                     onChange={(e) =>
                                                         setData(
                                                             "title",

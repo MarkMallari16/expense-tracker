@@ -68,15 +68,8 @@ function Category(props) {
 
             // Assuming the response includes the updated goal
             const updatedGoal = response.props.goals.find(g => g.id === fundsModal.goal.id);
-<<<<<<< HEAD
-            setFundsModal({ ...fundsModal, goal: updatedGoal }); 
-            setFundsModal({ show: false, goal: null }); 
-            location.reload()
-           
-=======
             setFundsModal({ ...fundsModal, goal: updatedGoal });
             setFundsModal({ show: false, goal: null }); // Close the modal
->>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
         } catch (error) {
             console.error("Error adding funds:", error);
             setFundsModal({ show: false, goal: null }); // Close the modal

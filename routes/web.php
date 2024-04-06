@@ -71,11 +71,7 @@ Route::resource('expenses', ExpenseController::class)
 
 
 // expense page route
-<<<<<<< HEAD
-Route::get('/expense', [ExpenseController::class, 'show'])->middleware(['auth', 'verified'])->name("expense");
-=======
 Route::get('/expense', [ExpenseController::class, 'expensePage'])->middleware(['auth', 'verified'])->name("expense");;
->>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
 
 
 require __DIR__ . '/auth.php';

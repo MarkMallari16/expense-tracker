@@ -37,12 +37,9 @@
         "flowbite-react": "^0.7.2",
         "framer-motion": "^11.0.8",
         "lucide-react": "^0.303.0",
-<<<<<<< HEAD
         "rc-progress": "^3.5.1",
-=======
         "moment": "^2.30.1",
         "react-apexcharts": "^1.4.1",
->>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
         "react-chartjs-2": "^5.2.0",
         "react-table": "^7.8.0",
         "react-toastify": "^10.0.5",
