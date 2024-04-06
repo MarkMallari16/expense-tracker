@@ -19,10 +19,27 @@ class IncomeController extends Controller
     {
         // Retrieve all income records from the database
         $user_id = Auth::id();
+
+        // Fetch all income records
         $income = Income::where('user_id', $user_id)->get();
 
+        // Fetch and sum monthly income records
+        $monthlyIncomeSum = Income::where('user_id', $user_id)
+            ->where('schedule', 'monthly')
+            ->sum('income');
+
+        // Debugging
+        // Output the value of $monthlyIncomeSum
+
+        $yearlyIncome = $monthlyIncomeSum * 12;
+
+
         // Use Inertia to render the React component with data
-        return Inertia::render('Income', ['income' => $income]);
+        return Inertia::render('IncomeFolder/IncomePage', [
+            'income' => $income,
+            'monthlyIncomeSum' => $monthlyIncomeSum,
+            'yearlyIncome' => $yearlyIncome // Corrected
+        ]);
     }
 
     /**

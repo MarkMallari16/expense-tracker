@@ -1,30 +1,36 @@
 import React, { useState } from 'react';
 
-const cardData = [
-  {
-    id: 1,
-    content: 'Weekly Expenses',
-    value: '15,000',
-    bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'], // Dark, Light, Lighter
-    textColor: ['text-white', 'text-gray-300', 'text-gray-400'], // Dark, Light, Lighter text colors
-  },
-  {
-    id: 2,
-    content: 'Monthly Expenses',
-    value: '25,000',
-    bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'],
-    textColor: ['text-white', 'text-gray-300', 'text-gray-400'],
-  },
-  {
-    id: 3,
-    content: 'Yearly Expenses',
-    value: '55,000',
-    bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'],
-    textColor: ['text-white', 'text-gray-300', 'text-gray-400'],
-  },
-];
 
-function CardStack() {
+
+function CardStack({monthlyIncomeSum, yearlyIncome}) {
+    const monthlyIncome = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(monthlyIncomeSum);
+    const YearlyPotentialIncome = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(yearlyIncome);
+
+    console.log(yearlyIncome)
+    const cardData = [
+        {
+          id: 1,
+          content: 'Wallet',
+          value: '15,000',
+          bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'], // Dark, Light, Lighter
+          textColor: ['text-white', 'text-gray-300', 'text-gray-400'], // Dark, Light, Lighter text colors
+        },
+        {
+          id: 2,
+          content: 'Monthly Income',
+          value: monthlyIncome,
+          bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'],
+          textColor: ['text-white', 'text-gray-300', 'text-gray-400'],
+        },
+        {
+          id: 3,
+          content: 'Yearly Potential Income',
+          value: YearlyPotentialIncome,
+          bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'],
+          textColor: ['text-white', 'text-gray-300', 'text-gray-400'],
+        },
+      ];
+
   const [cards, setCards] = useState(cardData.map((card, index) => ({
     ...card,
     currentBgColor: card.bgColor[index], // Adjust initial bg color based on position

@@ -2,23 +2,14 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import { Inertia } from "@inertiajs/inertia";
 
-function Category(props) {
-    function formatReadableDate(dateString) {
-        // Parse the date string and format it
-        return format(new Date(dateString), "MMMM d, yyyy");
-    }
-
-    // Example usage:
-    const goalTargetDate = "2023-03-03";
-    console.log("datahi", props.goals);
-    const [fundsModal, setFundsModal] = useState({ show: false, goal: null });
-
+function ExpenseCategory(props) {
+  
+  
     const goals = props.goals;
+    
     const [form, setForm] = useState({
-        name: "",
-        target_amount: "",
-        target_date: "",
-        users_image: null,
+       name: "",
+       users_image: ""
     });
     const [showModal, setShowModal] = useState(false);
 
@@ -32,7 +23,7 @@ function Category(props) {
 
         try {
             // Use Inertia.post method to send form data to the Laravel backend
-            await Inertia.post(route("goals.store"), formData);
+            // await Inertia.post(route("goals.store"), formData);
 
             // Reset form fields
             setForm({
@@ -142,12 +133,12 @@ function Category(props) {
                                     {/*body*/}
                                     <div className="relative p-6 flex-auto">
                                         <div className="flex flex-wrap -mx-3 mb-2">
-                                            <div className="w-full md:w-[50%] px-3 mb-6 md:mb-0">
+                                            <div className="w-full px-3 mb-6 md:mb-0">
                                                 <label
                                                     className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                                     for="grid-city"
                                                 >
-                                                    Title
+                                                    Name
                                                 </label>
                                                 <input
                                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -166,44 +157,10 @@ function Category(props) {
                                                 />
                                             </div>
 
-                                            <div className="w-full md:w-[50%] px-3 mb-6 md:mb-0">
-                                                <label
-                                                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                                    for="grid-zip"
-                                                >
-                                                    Price
-                                                </label>
-                                                <input
-                                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                    id="grid-zip"
-                                                    type="number"
-                                                    value={form.target_amount}
-                                                    onChange={(e) =>
-                                                        setForm({
-                                                            ...form,
-                                                            target_amount: e.target
-                                                                .value,
-                                                        })
-                                                    }
-                                                    required
-                                                    placeholder="90210"
-                                                />
-                                            </div>
-                                            <input
-                                                className="mx-3 mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                type="date"
-                                                value={form.target_date}
-                                                onChange={(e) =>
-                                                    setForm({
-                                                        ...form,
-                                                        target_date:
-                                                            e.target.value,
-                                                    })
-                                                }
-                                                required
-                                            />
+
+                                         
                                         </div>
-                                        <div>
+                                        <div className="mt-2">
                                             <input
                                                 type="file"
                                                 required
@@ -294,4 +251,4 @@ function Category(props) {
     );
 }
 
-export default Category;
+export default ExpenseCategory;

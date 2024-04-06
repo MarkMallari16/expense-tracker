@@ -38,6 +38,39 @@ class ExpenseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    function expensePage()
+    {
+        $userId = Auth::id();
+        $expenses = Expense::where('user_id', $userId)->get();
+        $finance = Finance::where('user_id', $userId)->get();
+        return Inertia::render('Expense', [
+            'expenses' => $expenses
+        ]);
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'users_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $users_image = null;
+        if ($request->hasFile('users_image')) {
+            $image = $request->file('users_image');
+            $filename = $image->store('images', 'public');
+            $users_image = $filename;
+        }
+
+        $user = auth()->user();
+        $goal = $user->expenseCategory()->create([
+            'name' => $request->input('name'),
+            'users_image' => $users_image,
+        ]);
+
+        return redirect()->route('dashboard');
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
