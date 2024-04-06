@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Download, Search } from 'lucide-react';
 import DropdownMenu from './DropdownMenu';
-import { format, parseISO } from 'date-fns';
 
-function ExpenseHistory({expenses}) {
-  const [history, setHistory] = useState(expenses);
+function ExpenseHistory() {
+  const [history, setHistory] = useState([
+    { id: '1', title: "Electricity", category: 'Utilities', date: '2023-03-01', value: '$100' },
+    { id: '2', title: "Foods", category: 'Groceries', date: '2023-03-02', value: '$200' },
+    { id: '3', title: "Water Bill", category: 'Utilities', date: '2023-03-03', value: '$150' },
+    { id: '4', title: "Netflix", category: 'Entertainment', date: '2023-03-04', value: '$50' },
+    // Add more history items as needed
+  ]);
 
   const items = [
     { name: "Utilities" },
@@ -27,23 +32,18 @@ function ExpenseHistory({expenses}) {
     setSearchQuery(e.target.value);
   };
 
-  console.log(expenses)
-  const filteredHistory = history && Array.isArray(history) ?
-  history.filter((item) => {
+  const filteredHistory = history.filter((item) => {
     const searchMatch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.category.toLowerCase().includes(searchQuery.toLowerCase());
     return searchMatch;
   }).filter((item) => {
     const categoryMatch = selectedFilters.length === 0 || selectedFilters.includes(item.category);
     return categoryMatch;
-  }) : [];
-
+  });
 
   return (
     <div>
       <div className="flex mb-4 w-full text-center p-5 bg-blue-800 text-white rounded">
-        <div className='w-[22%] pt-2'>
-          <Download className="mr-2" size={24} />
-        </div>
+
         <div className="flex-grow">
           <div className="relative w-full max-w-5xl">
             <button
@@ -81,20 +81,13 @@ function ExpenseHistory({expenses}) {
       </div>
       <div className="flex flex-col items-center justify-top p-4 text-black bg-white rounded shadow">
         <div className="w-full">
-          {expenses?.map((item) => (
+          {filteredHistory.map((item) => (
             <div key={item.id} className="mb-4 p-4 bg-gray-100 rounded shadow flex justify-between">
               <div className="flex flex-col">
               <p className="text-md font-bold text-gray-600 mb-auto">{item.title}</p>
-<<<<<<< HEAD
-                <p className="text-sm text-gray-600 mb-3">Date: <span className="font-semibold">{format(parseISO(item.created_at), 'MMMM dd, yyyy - hh:mm a')}
-</span></p>
+                <p className="text-sm text-gray-600 mb-3">Date: <span className="font-semibold">{item.date}</span></p>
                 <p className="text-sm text-gray-600 mb-auto">Category: <span className="font-semibold">{item.category}</span></p>
-                <p className="text-sm text-gray-600 mb-auto">Value: <span className="font-semibold">{item.price}</span></p>
-=======
-                <p className="text-sm text-gray-600 mb-3">Date: <span className="font-semibold">{item.created_at}</span></p>
-                <p className="text-sm text-gray-600 mb-auto">Category: <span className="font-semibold">{item.category}</span></p>
-                <p className="text-sm text-gray-600 mb-auto">Value: <span className="font-semibold">P{item.price}</span></p>
->>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
+                <p className="text-sm text-gray-600 mb-auto">Value: <span className="font-semibold">{item.value}</span></p>
               </div>
             </div>
           ))}

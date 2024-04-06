@@ -6,7 +6,13 @@ import BalanceCard from "@/Components/BalanceCard";
 import Category from "@/Components/Category/Category";
 import { useState } from "react";
 import Graphs from "@/Components/Category/Graphs";
+
+
 import Card from "@/Components/Card";
+import { ToastContainer, toast } from 'react-toastify';
+
+
+
 import Transaction from "@/Components/Transaction/Transaction";
 import {
     Wallet,
@@ -18,6 +24,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { Dropdown } from "flowbite-react";
+import Budget from "@/Components/BudgetFolder/Budget";
 export default function Dashboard({ auth, expenses, goals, finance }) {
     console.log("kani", finance[0]);
     const { response } = usePage();
@@ -32,6 +39,8 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
         { year: 2015, count: 30 },
         { year: 2016, count: 28 },
     ];
+    
+
 
     const changeShow = () => {
         setShow((prevShow) => !prevShow);
@@ -42,18 +51,55 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
         category: "",
         price: "",
     });
+    const wallet = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.wallet );
+    const incomeData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.totalIncome );
+    const expenseData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.expense);
+    const noBalance = () => {
 
+       
+     
+
+    } 
+
+    console.log(finance[0]?.wallet);
 
     const submit = (e) => {
         e.preventDefault();
-        console.log("Submitting data:", data);
-        post(route("expenses.store"), {
-            onSuccess: () => {
-                reset();
-                setShowModal(false);
-            },
-        });
+        
+        const balance = parseFloat(finance[0]?.wallet);
+        const expensePrice = parseFloat(data.price);
+    
+        console.log("Balance:", balance);
+        console.log("Expense Price:", expensePrice);
+    
+        if (isNaN(balance) || isNaN(expensePrice)) {
+            console.error("Error: Balance or Expense Price is not a number");
+            return;
+        }
+    
+        if (balance < expensePrice) {
+            console.log("Not Enough Balance");
+            toast.error('Not Enough Balance', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } else {
+            console.log("Submitting data:", data);
+            post(route("expenses.store"), {
+                onSuccess: () => {
+                    reset();
+                    setShowModal(false);
+                },
+            });
+        }
     };
+    
 
     return (
         <AuthenticatedLayout user={auth.user}>
@@ -72,7 +118,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 Wallet
                             </p>
                             <h5 className="text-white font-bold text-2xl px-2">
-                                ₱{finance[0]?.wallet !== undefined ? finance[0]?.wallet : 0}
+                                {wallet !== undefined ? wallet : 0}
                             </h5>
                             {show && (
                                 <div className="w-20 h-12 bg-white absolute top-10 left-32">
@@ -97,7 +143,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 Income
                             </p>
                             <h5 className="text-[#020826] font-bold text-2xl px-2">
-                                ₱{finance[0]?.totalIncome ? finance[0]?.totalIncome : 0}
+                                {incomeData ? incomeData : 0}
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
@@ -114,8 +160,8 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                             <p className="text-[#020826] px-2 text-xl mt-3 font-bold">
                                 Expenses
                             </p>
-                            <h5 className="text-[#932b2b] font-bold text-2xl px-2">
-                                ₱{finance[0]?.expense !== undefined ? finance[0]?.expense : 0 }
+                            <h5 className="text-red-600 font-bold text-2xl px-2">
+                                {expenseData !== undefined ? expenseData : 0 }
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
@@ -128,6 +174,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                         </div>
                     </div>
                     <Graphs expenses={expenses} />
+               
 
                     <div className=" bg-white sm:mx-10">
                         <div className="flex justify-between items-center pr-2">
@@ -144,8 +191,9 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                 </div>
                 <div className="flex flex-col items-center w-[90%] sm:w-[20%]">
                     <Card />
-
+                 
                     <Category goals={goals} />
+                    <Budget/>
                 </div>
             </div>
 
@@ -188,7 +236,11 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                     id="grid-city"
                                                     type="text"
+<<<<<<< HEAD
                                                     placeholder="ex.Chowking"
+=======
+                                                    placeholder="House"
+>>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
                                                     onChange={(e) =>
                                                         setData(
                                                             "title",
@@ -271,7 +323,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                         Close
                                     </button>
                                     <button
-                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="submit"
 
                                         >
@@ -283,6 +335,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                         </form>
                     </div>
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    <ToastContainer />
                 </>
             ) : null}
         </AuthenticatedLayout>

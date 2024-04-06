@@ -112,7 +112,7 @@ function Transaction( expenses ) {
                 ))
               ) : (
                 <tr className="text-center h-32">
-                  <td colSpan={12}>No Recoard Found!</td>
+                  <td colSpan={12}>No Record Found!</td>
                 </tr>
               )}
             </tbody>

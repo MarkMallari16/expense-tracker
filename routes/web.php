@@ -10,6 +10,8 @@ use App\Http\Controllers\FinancialSetupController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +56,7 @@ Route::get('/goals/{goal}/edit', [GoalsController::class, 'edit'])->name('goals.
 Route::put('/goals/{goal}', [GoalsController::class, 'update'])->name('goals.update');
 Route::delete('/goals/{goal}', [GoalsController::class, 'destroy'])->name('goals.destroy');
 
+Route::post('/expense_categories', [ExpenseCategoryController::class, 'store'])->name('expense_categories.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -68,7 +71,14 @@ Route::resource('expenses', ExpenseController::class)
 
 
 // expense page route
+<<<<<<< HEAD
 Route::get('/expense', [ExpenseController::class, 'show'])->middleware(['auth', 'verified'])->name("expense");
+=======
+Route::get('/expense', [ExpenseController::class, 'expensePage'])->middleware(['auth', 'verified'])->name("expense");;
+>>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
 
 
 require __DIR__ . '/auth.php';
+
+
+//incomepage.jsx route altering incomepage.jsx
