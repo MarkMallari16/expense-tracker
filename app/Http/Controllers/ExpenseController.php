@@ -27,6 +27,18 @@ class ExpenseController extends Controller
             'finance' => $finance,
         ]);
     }
+
+    public function show()
+    {
+        $userId = Auth::id();
+        $expenses = Expense::where('user_id', $userId)->get();
+        $finance = Finance::where('user_id', $userId)->get();
+
+        return Inertia::render('Expense', [
+            'expenses' => $expenses,
+            'finance' => $finance,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -71,10 +83,7 @@ class ExpenseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(expense $expense)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

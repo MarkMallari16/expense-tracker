@@ -188,7 +188,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                     id="grid-city"
                                                     type="text"
-                                                    placeholder="Albuquerque"
+                                                    placeholder="ex.Chowking"
                                                     onChange={(e) =>
                                                         setData(
                                                             "title",

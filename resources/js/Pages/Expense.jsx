@@ -12,13 +12,9 @@ import { Search } from 'lucide-react';
 
 import ExpenseHistory from './ExpenseHistory';
 
-function Expense({auth}) {
+function Expense({auth, expenses, finance}) {
 
-
-
-
-
-
+  console.log(expenses)
 
       const [setCategoryFilter, categoryFilter] = useState("")
 
@@ -65,7 +61,7 @@ function Expense({auth}) {
 
       <div className="p-4 text-white bg-white-500 rounded shadow h-60">
 
-        <CardStack /> {/* Use the CardStack component here */}
+        <CardStack expenses={expenses} /> {/* Use the CardStack component here */}
       </div>
 
      {/* Section 2 as a button */}
@@ -108,7 +104,7 @@ function Expense({auth}) {
 
       {/* Section 6 */}
       <div className="flex-grow p-4 text-black bg-white-500 rounded shadow">
-      <ExpenseHistory />
+      <ExpenseHistory expenses={expenses}/>
         </div>
 
         </div>
