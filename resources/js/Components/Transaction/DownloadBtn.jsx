@@ -19,14 +19,21 @@ const DownloadBtn = ({ expense = [], fileName = "data" }) => {
   };
 
   return (
-    <button
-      className="download-btn"
-      onClick={handleDownload}
-      aria-label="Download Excel"
-    >
-      <DownloadIcon />
-      Download
-    </button>
+    <div >
+      <div className="flex items-center gap-1">
+        <DownloadIcon />
+        <button
+          className="download-btn"
+          onClick={handleDownload}
+          aria-label="Download Excel"
+
+        >
+
+          Download
+        </button>
+
+      </div>
+    </div>
   );
 };
 

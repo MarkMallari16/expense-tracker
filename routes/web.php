@@ -56,6 +56,7 @@ Route::get('/goals/{goal}/edit', [GoalsController::class, 'edit'])->name('goals.
 Route::put('/goals/{goal}', [GoalsController::class, 'update'])->name('goals.update');
 Route::delete('/goals/{goal}', [GoalsController::class, 'destroy'])->name('goals.destroy');
 
+Route::post('/expense_categories', [ExpenseCategoryController::class, 'store'])->name('expense_categories.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

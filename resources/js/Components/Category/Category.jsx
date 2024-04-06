@@ -4,11 +4,11 @@ import { Inertia } from "@inertiajs/inertia";
 
 function Category(props) {
     function formatReadableDate(dateString) {
-// Parse the date string and format it
-        return format(new Date(dateString), "MMMM d, yyyy" );
+        // Parse the date string and format it
+        return format(new Date(dateString), "MMMM d, yyyy");
     }
 
-// Example usage:
+    // Example usage:
     const goalTargetDate = "2023-03-03";
     console.log("datahi", props.goals);
     const [fundsModal, setFundsModal] = useState({ show: false, goal: null });
@@ -87,19 +87,19 @@ function Category(props) {
                 <p className="text-xl">Category</p>
             </div>
             <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
-               <div className="flex items-center">
-               <div className="" onClick={() => setShowModal(true)}>
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-orange-200">
-                        <span className="text-4xl">+</span>
-                    </div>
+                <div className="flex items-center">
+                    <div className="" onClick={() => setShowModal(true)}>
+                        <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-orange-200">
+                            <span className="text-4xl">+</span>
+                        </div>
 
-                </div>
-                <div className="w-50 py-2 px-2">
+                    </div>
+                    <div className="w-50 py-2 px-2">
                         <p className="text-lg font-bold">Add Category</p>
+                    </div>
                 </div>
-               </div>
                 {goals?.map((goal) => (
-                    <div className="flex" key={goal.id}  onClick={() => handleGoalClick(goal)}>
+                    <div className="flex" key={goal.id} onClick={() => handleGoalClick(goal)}>
                         <div className="w-fit h-fit rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
                             <span className="text-4xl w-14 h-14 flex object-cover justify-center cursor-pointer items-center">
                                 <img className="w-14 h-14 object-cover rounded-full" src={`storage/${goal.users_image}`} alt="profile" />
@@ -153,7 +153,7 @@ function Category(props) {
                                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                     id="grid-city"
                                                     type="text"
-                                                    placeholder="Albuquerque"
+                                                    placeholder="House"
                                                     value={form.name}
                                                     onChange={(e) =>
                                                         setForm({
