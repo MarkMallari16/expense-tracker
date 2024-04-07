@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ApexCharts from 'apexcharts';
 
 const ApexChart = ({ expenses }) => {
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption] = useState('Today');
     const [chartData, setChartData] = useState([]);
+    const chartRef = useRef(null);
 
     useEffect(() => {
         const currentDate = new Date();
         let filteredData = [];
-
+    
         switch (selectedOption) {
             case 'Yesterday':
                 filteredData = expenses.filter((expense) => {
@@ -51,17 +52,36 @@ const ApexChart = ({ expenses }) => {
             default:
                 filteredData = expenses;
         }
-
-        const newChartData = filteredData.map(expense => ({
-            x: new Date(expense.created_at).getTime(),
-            y: expense.price
-        }));
-
-        setChartData(newChartData);
-
-        renderChart(newChartData); // Call renderChart immediately after setting chartData
+    
+        // Prepare chart data based on filter option
+        let chartData = [];
+        if (selectedOption === 'Today' || selectedOption === 'Yesterday') {
+            chartData = filteredData.map(expense => ({
+                x: new Date(expense.created_at).getTime(),
+                y: expense.price
+            }));
+        } else {
+            const aggregatedExpenses = {};
+            filteredData.forEach(expense => {
+                const date = new Date(expense.created_at).toDateString();
+                if (aggregatedExpenses[date]) {
+                    aggregatedExpenses[date] += expense.price;
+                } else {
+                    aggregatedExpenses[date] = expense.price;
+                }
+            });
+            chartData = Object.keys(aggregatedExpenses).map(date => ({
+                x: new Date(date).getTime(),
+                y: aggregatedExpenses[date]
+            }));
+        }
+    
+        // Render chart
+        if (chartRef.current && chartData.length > 0) {
+            renderChart(chartData);
+        }
     }, [selectedOption, expenses]);
-
+    
     const renderChart = (data) => {
         const options = {
             chart: {
@@ -129,20 +149,33 @@ const ApexChart = ({ expenses }) => {
                 show: false,
             },
         };
-
-        if (document.getElementById("area-chart")) {
-            const chart = new ApexCharts(document.getElementById("area-chart"), options);
-            chart.render();
+    
+        try {
+            // Check if chartRef.current is available
+            if (chartRef.current) {
+                // Destroy existing chart instance if it exists
+                if (chartRef.current.chart) {
+                    chartRef.current.chart.destroy();
+                }
+                // Create new chart instance
+                chartRef.current.chart = new ApexCharts(chartRef.current, options);
+                // Render the chart with new data
+                chartRef.current.chart.render();
+            }
+        } catch (error) {
+            console.error("Error rendering chart:", error);
         }
     };
 
     const handleFilterChange = (e) => {
         setSelectedOption(e.target.value);
-    };
+        setChartData([]); // Clear chart data to force re-render
+    }; 
+    console.log(chartData)
 
     return (
         <div className="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-            <div id="area-chart" className='w-full'></div>
+            <div ref={chartRef} className='w-full'></div>
             <div className="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
                 <div className="flex justify-between items-center pt-5">
                     <div className="relative">
@@ -151,7 +184,7 @@ const ApexChart = ({ expenses }) => {
                             onChange={handleFilterChange}
                             className="block w-full py-2 pl-3 pr-10 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                         >
-                            <option value="">Select Filter</option>
+                            <option value="">Select</option>
                             <option value="Yesterday">Yesterday</option>
                             <option value="Today">Today</option>
                             <option value="Last 7 days">Last 7 days</option>

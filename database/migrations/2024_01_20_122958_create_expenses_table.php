@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('category');
             $table->integer('price');
+            $table->boolean('recurring')->default(false); // Add recurring field
+            $table->string('recurring_type')->nullable(); // Add recurring_type field
+            $table->date('start_date')->nullable(); // Add start_date field
+            $table->date('end_date')->nullable(); // Add end_date field
             $table->timestamps();
         });
     }
@@ -28,4 +32,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('expenses');
     }
-};
+}
+

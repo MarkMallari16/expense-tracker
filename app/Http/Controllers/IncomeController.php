@@ -21,6 +21,7 @@ class IncomeController extends Controller
         $user_id = Auth::id();
 
         // Fetch all income records
+        $finance = Finance::where('user_id', $user_id)->get();
         $income = Income::where('user_id', $user_id)->get();
 
         // Fetch and sum monthly income records
@@ -38,7 +39,8 @@ class IncomeController extends Controller
         return Inertia::render('IncomeFolder/IncomePage', [
             'income' => $income,
             'monthlyIncomeSum' => $monthlyIncomeSum,
-            'yearlyIncome' => $yearlyIncome // Corrected
+            'yearlyIncome' => $yearlyIncome ,// Corrected
+            'finance' =>     $finance,
         ]);
     }
 

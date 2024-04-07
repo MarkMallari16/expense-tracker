@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('income:add')->daily();
         $schedule->command('income:add')->everyMinute();
+        $schedule->command('expenses:deduct')->daily();
     }
 
 
@@ -29,5 +30,6 @@ class Kernel extends ConsoleKernel
     }
     protected $commands = [
         Commands\AddIncome::class,
+        
     ];
 }

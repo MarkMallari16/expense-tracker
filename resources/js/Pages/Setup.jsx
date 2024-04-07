@@ -24,7 +24,7 @@ function FinancialSetupPage() {
     setRecurringBills(filteredBills);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event) => { 
     event.preventDefault();
     if (step < 4) {
       setStep(step + 1);
@@ -37,8 +37,11 @@ function FinancialSetupPage() {
       });
 
       setStep(step + 1)
-      setInterval(() => 5000)
-      window.location.href = "/";
+      setInterval(() => 10000)
+      setInterval(() => 10000)
+      setInterval(() => 500)
+
+      window.location.reload()
     }
   };
 

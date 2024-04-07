@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Observers\ExpenseObserver;
 
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
@@ -93,30 +94,38 @@ class ExpenseController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'price' => 'required|integer'
+            'price' => 'required|integer',
+            'recurring' => 'boolean',
+            'recurring_type' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
         ]);
-
-        $user = $request->user();
+    
+        $user = Auth::user();
         $walletBalance = $user->finance->wallet;
-
+    
         // Check if the user has enough balance
         if ($walletBalance >= $validated['price']) {
             // Deduct expense from wallet
             $user->finance->wallet -= $validated['price'];
-
+    
             // Update total expenses
             $user->finance->expense += $validated['price'];
-
+    
+            // Save the wallet and expense changes
             $user->finance->save();
-
-            // Create new expense
-            $user->expense()->create($validated);
-
+    
+            // Create new expense with associated user ID
+            $expense = $user->expense()->create($validated);
+    
             return redirect(route('expenses.store'))->with('success', 'Expense added successfully!');
         } else {
             return redirect(route('expenses.store'))->with('error', 'Insufficient funds!');
         }
     }
+    
+    
+
 
     /**
      * Display the specified resource.
