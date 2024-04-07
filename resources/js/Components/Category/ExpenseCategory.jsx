@@ -3,33 +3,32 @@ import { format } from "date-fns";
 import { Inertia } from "@inertiajs/inertia";
 
 function ExpenseCategory(props) {
-  
-    const [fundsModal,setFundsModal] = useState(false);
+
+
+
+    const [fundsModal, setFundsModal] = useState(false);
     const goals = props.goals;
+
+    const expensesCategory = props.expenseCategory;
+
     const [form, setForm] = useState({
-       name: "",
-       users_image: ""
+        name: "",
+        users_image: ""
     });
+
     const [showModal, setShowModal] = useState(false);
 
     const submitForm = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
 
-        const formData = {
-            ...form,
-            name: form.name || "Default Name",
-        };
-
         try {
-            // Use Inertia.post method to send form data to the Laravel backend
-            // await Inertia.post(route("goals.store"), formData);
+            // Use Inertia's post method to send form data to the Laravel backend
+            await Inertia.post(route("expense_categories.store"), form);
 
             // Reset form fields
             setForm({
                 name: "",
-                target_amount: "",
-                target_date: "",
-                users_image: null,
+                users_image: ""
             });
 
             // Close the modal
@@ -38,7 +37,6 @@ function ExpenseCategory(props) {
             console.error("Error submitting form:", error);
         }
     };
-
     const handleGoalClick = (goal) => {
         setFundsModal({ show: true, goal });
     };
@@ -72,7 +70,7 @@ function ExpenseCategory(props) {
     };
 
     return (
-        <div className="w-full mx-auto bg-white h-22  py-2 sm:rounded-md">
+        <div className="w-full mx-auto bg-white h-22  py-2 sm:rounded-md ">
             <div className="border-b-2 px-2 border-[#fafafa] mb-3">
                 <p className="text-xl">Category</p>
             </div>
@@ -88,21 +86,16 @@ function ExpenseCategory(props) {
                         <p className="text-lg font-bold">Add Category</p>
                     </div>
                 </div>
-                {goals?.map((goal) => (
-                    <div className="flex" key={goal.id} onClick={() => handleGoalClick(goal)}>
+                {expensesCategory?.map((category) => (
+                    <div className="flex" key={category.id} onClick={() => handleGoalClick(category)}>
                         <div className="w-fit h-fit rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
                             <span className="text-4xl w-14 h-14 flex object-cover justify-center cursor-pointer items-center">
-                                <img className="w-14 h-14 object-cover rounded-full" src={`storage/${goal.users_image}`} alt="profile" />
+                                <img className="w-14 h-14 object-cover rounded-full" src={`${category.users_image}`} alt={category.name} />
                             </span>
                         </div>
                         <div className="w-36 py-2 px-2">
-                            <p className="text-md font-bold">{goal.name}</p>
-                            <p className="text-xs font-bold">
-                                ₱{goal.target_amount?.toLocaleString()}
-                            </p>
-                            <p className="text-xs font-bold">
-                                {formatReadableDate(goal.target_date)}
-                            </p>
+                            <p className="text-md font-bold">{category.name}</p>
+                    
                         </div>
                     </div>
                 ))}
@@ -157,7 +150,7 @@ function ExpenseCategory(props) {
                                             </div>
 
 
-                                         
+
                                         </div>
                                         <div className="mt-2">
                                             <input

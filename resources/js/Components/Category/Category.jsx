@@ -98,7 +98,7 @@ function Category(props) {
 
                     </div>
                     <div className="w-50 py-2 px-2">
-                        <p className="text-lg font-bold">Add New Goal</p>
+                        <p className="text-md font-bold">Add New Goal</p>
                     </div>
                 </div>
                 {goals?.map((goal) => (

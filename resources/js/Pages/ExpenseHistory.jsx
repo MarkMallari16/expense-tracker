@@ -85,16 +85,9 @@ function ExpenseHistory({expenses}) {
             <div key={item.id} className="mb-4 p-4 bg-gray-100 rounded shadow flex justify-between">
               <div className="flex flex-col">
               <p className="text-md font-bold text-gray-600 mb-auto">{item.title}</p>
-<<<<<<< HEAD
-                <p className="text-sm text-gray-600 mb-3">Date: <span className="font-semibold">{format(parseISO(item.created_at), 'MMMM dd, yyyy - hh:mm a')}
-</span></p>
-                <p className="text-sm text-gray-600 mb-auto">Category: <span className="font-semibold">{item.category}</span></p>
-                <p className="text-sm text-gray-600 mb-auto">Value: <span className="font-semibold">{item.price}</span></p>
-=======
                 <p className="text-sm text-gray-600 mb-3">Date: <span className="font-semibold">{item.created_at}</span></p>
                 <p className="text-sm text-gray-600 mb-auto">Category: <span className="font-semibold">{item.category}</span></p>
                 <p className="text-sm text-gray-600 mb-auto">Value: <span className="font-semibold">P{item.price}</span></p>
->>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
               </div>
             </div>
           ))}

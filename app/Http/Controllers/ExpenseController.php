@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use App\Models\Finance;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -33,7 +34,7 @@ class ExpenseController extends Controller
         $userId = Auth::id();
         $expenses = Expense::where('user_id', $userId)->get();
         $finance = Finance::where('user_id', $userId)->get();
-
+        
         return Inertia::render('Expense', [
             'expenses' => $expenses,
             'finance' => $finance,
@@ -55,8 +56,10 @@ class ExpenseController extends Controller
         $userId = Auth::id();
         $expenses = Expense::where('user_id', $userId)->get();
         $finance = Finance::where('user_id', $userId)->get();
+        $expenseCategory = ExpenseCategory::all();
         return Inertia::render('Expense', [
-            'expenses' => $expenses
+            'expenses' => $expenses,
+            'expenseCategory' => $expenseCategory
         ]);
     }
 

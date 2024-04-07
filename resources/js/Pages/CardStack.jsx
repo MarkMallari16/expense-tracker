@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { isThisWeek, isThisMonth, isThisYear } from 'date-fns';
 
-<<<<<<< HEAD
 function CardStack({ expenses }) {
   // Define initial state for cards
   const [cards, setCards] = useState([
@@ -33,7 +32,6 @@ function CardStack({ expenses }) {
       currentTextColor: 'text-white',
     },
   ]);
-=======
 const cardData = [
   {
     id: 1,
@@ -57,7 +55,6 @@ const cardData = [
     textColor: ['text-white', 'text-gray-300', 'text-gray-400'],
   },
 ];
->>>>>>> 79392098ea276f986ee62c0c5e0feafef67ad4e9
 
   useEffect(() => {
     const weeklyTotal = expenses.reduce((acc, curr) => {

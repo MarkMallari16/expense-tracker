@@ -6,8 +6,6 @@ import BalanceCard from "@/Components/BalanceCard";
 import Category from "@/Components/Category/Category";
 import { useState } from "react";
 import Graphs from "@/Components/Category/Graphs";
-
-
 import Card from "@/Components/Card";
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -39,7 +37,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
         { year: 2015, count: 30 },
         { year: 2016, count: 28 },
     ];
-    
+
 
 
     const changeShow = () => {
@@ -51,32 +49,32 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
         category: "",
         price: "",
     });
-    const wallet = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.wallet );
-    const incomeData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.totalIncome );
+    const wallet = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.wallet);
+    const incomeData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.totalIncome);
     const expenseData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.expense);
     const noBalance = () => {
 
-       
-     
 
-    } 
+
+
+    }
 
     console.log(finance[0]?.wallet);
 
     const submit = (e) => {
         e.preventDefault();
-        
+
         const balance = parseFloat(finance[0]?.wallet);
         const expensePrice = parseFloat(data.price);
-    
+
         console.log("Balance:", balance);
         console.log("Expense Price:", expensePrice);
-    
+
         if (isNaN(balance) || isNaN(expensePrice)) {
             console.error("Error: Balance or Expense Price is not a number");
             return;
         }
-    
+
         if (balance < expensePrice) {
             console.log("Not Enough Balance");
             toast.error('Not Enough Balance', {
@@ -99,13 +97,13 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
             });
         }
     };
-    
+
 
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
 
-            <div className="flex flex-col sm:flex-row w-full gap-2 p-2">
+            <div className="flex flex-col sm:flex-row w-full  p-2">
                 <div className="sm:w-[80%] max-w-full  rounded-sm ">
                     <div className="flex flex-col sm:flex-row sm:px-10 py-7 gap-5">
                         <div className="bg-blue-800 sm:w-[24%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl">
@@ -148,7 +146,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
                             <div className="flex justify-between">
-                            <Receipt color="#020826" size={60}></Receipt>
+                                <Receipt color="#020826" size={60}></Receipt>
                                 <ChevronRight
                                     color="#020826"
                                     size={20}
@@ -161,11 +159,11 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 Expenses
                             </p>
                             <h5 className="text-red-600 font-bold text-2xl px-2">
-                                {expenseData !== undefined ? expenseData : 0 }
+                                {expenseData !== undefined ? expenseData : 0}
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
-                        <p className="text-[#020826] px-2 text-md mt-3 font-bold">
+                            <p className="text-[#020826] px-2 text-md mt-3 font-bold">
                                 Hello, {auth.user.name}
                             </p>
                             <h5 className="text-[#020826] font-bold text-3xl px-2">
@@ -174,7 +172,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                         </div>
                     </div>
                     <Graphs expenses={expenses} />
-               
+
 
                     <div className=" bg-white sm:mx-10">
                         <div className="flex justify-between items-center pr-2">
@@ -191,38 +189,38 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                 </div>
                 <div className="flex flex-col items-center w-[90%] sm:w-[20%]">
                     <Card />
-                 
+
                     <Category goals={goals} />
-                    <Budget/>
+                    <Budget />
                 </div>
             </div>
 
             {showModal ? (
                 <>
                     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <form
-                onSubmit={submit}
-                className="w-full max-w-lg"
-            >
-                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                            {/*content*/}
-                            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                {/*header*/}
-                                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                                    <h3 className="text-3xl font-semibold">
-                                        Add Expenses
-                                    </h3>
-                                    <button
-                                        className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                        onClick={() => setShowModal(false)}
-                                    >
-                                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                                            ×
-                                        </span>
-                                    </button>
-                                </div>
-                                {/*body*/}
-                                <div className="relative p-6 flex-auto">
+                        <form
+                            onSubmit={submit}
+                            className="w-full max-w-lg"
+                        >
+                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                {/*content*/}
+                                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                    {/*header*/}
+                                    <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                                        <h3 className="text-3xl font-semibold">
+                                            Add Expenses
+                                        </h3>
+                                        <button
+                                            className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                            onClick={() => setShowModal(false)}
+                                        >
+                                            <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                                ×
+                                            </span>
+                                        </button>
+                                    </div>
+                                    {/*body*/}
+                                    <div className="relative p-6 flex-auto">
                                         <div className="flex flex-wrap -mx-3 mb-2">
                                             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                                 <label
@@ -308,27 +306,27 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                         <div>
 
                                         </div>
-                                </div>
-                                {/*footer*/}
-                                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                                    <button
-                                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                        type="button"
-                                        onClick={() => setShowModal(false)}
+                                    </div>
+                                    {/*footer*/}
+                                    <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                        <button
+                                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => setShowModal(false)}
                                         >
-                                        Close
-                                    </button>
-                                    <button
-                                        className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                        type="submit"
+                                            Close
+                                        </button>
+                                        <button
+                                            className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="submit"
 
                                         >
-                                        Save Changes
-                                    </button>
+                                            Save Changes
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                                        </form>
+                        </form>
                     </div>
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                     <ToastContainer />

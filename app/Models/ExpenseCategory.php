@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExpenseCategory extends Model
 {
     use HasFactory;
-    protected $table = 'goals';
+    protected $table = 'expense_category';
     protected $fillable = ['user_id', 'name', 'users_image'];
 
     public function user()
@@ -16,3 +16,4 @@ class ExpenseCategory extends Model
         return $this->belongsTo(User::class);
     }
 }
+?>

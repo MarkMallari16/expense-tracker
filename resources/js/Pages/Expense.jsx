@@ -14,7 +14,8 @@ import { Head, useForm, usePage } from "@inertiajs/react";
 import ExpenseHistory from './ExpenseHistory';
 import ExpenseCategory from '@/Components/Category/ExpenseCategory';
 
-function Expense({ auth, expenses }) {
+function Expense({ auth, expenses,expenseCategory}) {
+    console.log(expenseCategory );
     const [show, setShow] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [setCategoryFilter, categoryFilter] = useState("")
@@ -24,21 +25,21 @@ function Expense({ auth, expenses }) {
         price: "",
     });
 
-     // State variables to hold the start and end dates
-     const [startDate, setStartDate] = useState('');
-     const [endDate, setEndDate] = useState('');
- 
-     // Function to handle changes in the start date input
-     const handleStartDateChange = (e) => {
-         setStartDate(e.target.value);
-     };
- 
-     // Function to handle changes in the end date input
-     const handleEndDateChange = (e) => {
-         setEndDate(e.target.value);
-     };
- 
-    
+    // State variables to hold the start and end dates
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    // Function to handle changes in the start date input
+    const handleStartDateChange = (e) => {
+        setStartDate(e.target.value);
+    };
+
+    // Function to handle changes in the end date input
+    const handleEndDateChange = (e) => {
+        setEndDate(e.target.value);
+    };
+
+
 
     console.log(expenses)
     const submit = (e) => {
@@ -93,7 +94,7 @@ function Expense({ auth, expenses }) {
 
                             <div className="p-4 text-white bg-white-500 rounded shadow h-60">
 
-                                <CardStack /> {/* Use the CardStack component here */}
+                                <CardStack expenses={expenses} /> {/* Use the CardStack component here */}
                             </div>
 
                             {/* Section 2 as a button */}
@@ -124,7 +125,7 @@ function Expense({ auth, expenses }) {
                         <div className="flex flex-col space-y-4 lg:col-span-3">
                             {/* Section 5 */}
                             <div className="h-auto p-4 text-black bg-white-500 rounded shadow">
-                                <ExpenseCategory />
+                                <ExpenseCategory expenseCategory={expenseCategory} />
 
                             </div>
 
@@ -218,7 +219,7 @@ function Expense({ auth, expenses }) {
                                                             </option>
                                                         </select>
                                                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                                         
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -243,7 +244,7 @@ function Expense({ auth, expenses }) {
                                                         }
                                                     />
 
-                                                    
+
 
 
 
@@ -258,89 +259,89 @@ function Expense({ auth, expenses }) {
 
 
 
-                                           {/* New dropdown */}
-<div className="relative p-0 flex-auto mt-5">
-    <div className="flex flex-wrap -mx-3 mb-10">
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-state"
-            >
-                New Dropdown
-            </label>
-            <div className="relative"> {/* Container with relative positioning */}
-                <select
-                    value={data.newOption}
-                    onChange={(e) => setData({ ...data, newOption: e.target.value })}
-                    className="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="grid-state"
-                    style={{ width: "100%" }} // Set width to 100%
-                >
-                    <option>Monthly</option>
-                    <option>Weekly</option>
-                    <option>Daily</option>
-                </select>
-            </div>
-        </div>
-        {/* Input field for start date */}
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="start-date"
-            >
-                Start Date
-            </label>
-            <input
-                type="date"
-                id="start-date"
-                value={startDate}
-                onChange={handleStartDateChange}
-                className="p-2 block w-full border-gray-300 rounded-md shadow-sm"
-            />
-        </div>
-        {/* Input field for end date */}
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="end-date"
-            >
-                End Date
-            </label>
-            <input
-                type="date"
-                id="end-date"
-                value={endDate}
-                onChange={handleEndDateChange}
-                className="p-2 block w-full border-gray-300 rounded-md shadow-sm"
-            />
-        </div>
-    </div>
-</div>
+                                            {/* New dropdown */}
+                                            <div className="relative p-0 flex-auto mt-5">
+                                                <div className="flex flex-wrap -mx-3 mb-10">
+                                                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                        <label
+                                                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                            htmlFor="grid-state"
+                                                        >
+                                                            New Dropdown
+                                                        </label>
+                                                        <div className="relative"> {/* Container with relative positioning */}
+                                                            <select
+                                                                value={data.newOption}
+                                                                onChange={(e) => setData({ ...data, newOption: e.target.value })}
+                                                                className="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                                id="grid-state"
+                                                                style={{ width: "100%" }} // Set width to 100%
+                                                            >
+                                                                <option>Monthly</option>
+                                                                <option>Weekly</option>
+                                                                <option>Daily</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    {/* Input field for start date */}
+                                                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                        <label
+                                                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                            htmlFor="start-date"
+                                                        >
+                                                            Start Date
+                                                        </label>
+                                                        <input
+                                                            type="date"
+                                                            id="start-date"
+                                                            value={startDate}
+                                                            onChange={handleStartDateChange}
+                                                            className="p-2 block w-full border-gray-300 rounded-md shadow-sm"
+                                                        />
+                                                    </div>
+                                                    {/* Input field for end date */}
+                                                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                        <label
+                                                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                            htmlFor="end-date"
+                                                        >
+                                                            End Date
+                                                        </label>
+                                                        <input
+                                                            type="date"
+                                                            id="end-date"
+                                                            value={endDate}
+                                                            onChange={handleEndDateChange}
+                                                            className="p-2 block w-full border-gray-300 rounded-md shadow-sm"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-                                            
-                                            
+
+
                                         </div>
 
 
 
-                                         {/*footer*/}
-                                         <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                                                    <button
-                                                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                        type="button"
-                                                        onClick={() => setShowModal(false)}
-                                                    >
-                                                        Close
-                                                    </button>
-                                                    <button
-                                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                        type="submit"
+                                        {/*footer*/}
+                                        <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                            <button
+                                                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                type="button"
+                                                onClick={() => setShowModal(false)}
+                                            >
+                                                Close
+                                            </button>
+                                            <button
+                                                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                type="submit"
 
-                                                    >
-                                                        Save Changes
-                                                    </button>
-                                                </div>
+                                            >
+                                                Save Changes
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
