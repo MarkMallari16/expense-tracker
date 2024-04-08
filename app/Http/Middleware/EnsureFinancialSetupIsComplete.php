@@ -18,7 +18,7 @@ class EnsureFinancialSetupIsComplete
         $user = $request->user();
 
         // Check if financial setup is complete. This is just an example; adjust according to your actual columns and models.
-        if (is_null($user->monthly_salary) || is_null($user->desired_budget) || is_null($user->budget_type) || !$user->recurringBills()->exists()) {
+        if (is_null($user->monthly_salary) || is_null($user->desired_budget) || is_null($user->budget_type)) {
             // Redirect to the financial setup page if the setup is not complete
             return redirect()->route('financial.setup')->with('error', 'Please complete your financial setup first.');
         }

@@ -41,6 +41,7 @@
         "rc-progress": "^3.5.1",
         "react-apexcharts": "^1.4.1",
         "react-chartjs-2": "^5.2.0",
+        "react-joyride": "^2.8.0",
         "react-table": "^7.8.0",
         "react-toastify": "^10.0.5",
         "xlsx": "^0.18.5"
