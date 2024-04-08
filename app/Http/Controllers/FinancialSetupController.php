@@ -19,11 +19,6 @@ class FinancialSetupController extends Controller
     {
         $data = $request->validate([
             'monthlySalary' => 'required|numeric|min:0',
-            'recurringBills' => 'array',
-            'recurringBills.*.name' => 'required|string|max:255',
-            'recurringBills.*.amount' => 'required|numeric|min:0',
-            'recurringBills.*.start' => 'required|date',
-            'recurringBills.*.end' => 'nullable|date|after_or_equal:recurringBills.*.start',
             'desiredBudget' => 'required|numeric|min:0',
             'budgetType' => 'required|string|in:daily,weekly,monthly',
         ]);
@@ -38,15 +33,7 @@ class FinancialSetupController extends Controller
         ]);
 
         // Handle recurring bills
-        foreach ($data['recurringBills'] as $bill) {
-            RecurringBill::create([
-                'user_id' => $user->id,
-                'name' => $bill['name'],
-                'amount' => $bill['amount'],
-                'start' => $bill['start'],
-                'end' => $bill['end'] ?? null,
-            ]);
-        }
+       
 
 
         $user->income()->create([

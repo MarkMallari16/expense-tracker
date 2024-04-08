@@ -3,14 +3,14 @@ import CardStack from './CardStack';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Pie } from 'react-chartjs-2';
 import RecurringExpenses from './RecurringExpenses';
-import ExpenseCalender from './Profile/ExpenseCalender';
+import ExpenseCalendar from './Profile/ExpenseCalender';
 import { useForm } from "@inertiajs/react";
 import ExpenseHistory from './ExpenseHistory';
 import ExpenseCategory from '@/Components/Category/ExpenseCategory';
 
 function Expense({ auth, expenses,expenseCategory}) {
     console.log(expenseCategory );
-    const [show, setShow] = useState(false);
+  
     const [showModal, setShowModal] = useState(false);
     const { data: formData, setData: setFormData, post, reset } = useForm({
         title: "",
@@ -21,19 +21,7 @@ function Expense({ auth, expenses,expenseCategory}) {
         recurring_type: "Monthly",
     });
 
-    // State variables to hold the start and end dates
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-
-    // Function to handle changes in the start date input
-    const handleStartDateChange = (e) => {
-        setStartDate(e.target.value);
-    };
-
-    // Function to handle changes in the end date input
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-    };
+ 
 
 
 
@@ -57,13 +45,17 @@ function Expense({ auth, expenses,expenseCategory}) {
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
-                // More colors as needed
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
-                // More borders as needed
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1,
         }],
@@ -93,7 +85,7 @@ function Expense({ auth, expenses,expenseCategory}) {
                                     <Pie data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
                                 </div>
                             </div>
-                            <ExpenseCalender expenses={expenses} />
+                            <ExpenseCalendar expenses={expenses} />
                         </div>
                         <div className="flex flex-col space-y-4 lg:col-span-3">
                             <div className="h-auto p-4 text-black bg-white-500 rounded shadow">

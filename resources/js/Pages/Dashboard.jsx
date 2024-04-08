@@ -4,11 +4,11 @@ import Sidebar from "@/Components/Sidebar";
 import PrimaryButton from "@/Components/PrimaryButton";
 import BalanceCard from "@/Components/BalanceCard";
 import Category from "@/Components/Category/Category";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Graphs from "@/Components/Category/Graphs";
 import Card from "@/Components/Card";
 import { ToastContainer, toast } from 'react-toastify';
-
+import Joyride, {STATUS} from "react-joyride";
 
 
 import Transaction from "@/Components/Transaction/Transaction";
@@ -25,24 +25,57 @@ import { Dropdown } from "flowbite-react";
 import Budget from "@/Components/BudgetFolder/Budget";
 export default function Dashboard({ auth, expenses, goals, finance }) {
     console.log("kani", finance[0]);
-    const { response } = usePage();
+
+  
+    
+    const [{run, steps}, setState] = useState({
+        run: true,
+        steps: [
+            {
+                content: <h2>Let's begin our journey</h2>,
+                locale: {skip: <strong>SKIP</strong>},
+                placement: 'center',
+                target: 'body'
+            },
+            {
+                content: <h2>Here you can see your available wallet balance</h2>,
+                title: "Wallet",
+                placement: 'bottom',
+                target: '#step-1'
+            },
+            {
+                content: <h2>You can see here your monthly income if you click on the go arrow you will be redirected to Income Page</h2>,
+                title: "Income",
+                placement: 'bottom',
+                target: '#step-2'
+            },
+            {
+                content: <h2>You can see here your monthly expenses if you click on the go arrow you will be redirected to Expense</h2>,
+                title: "Expense",
+                placement: 'bottom',
+                target: '#step-3'
+            }
+        ]
+    })
+
+    console.log(steps)
+
     const [show, setShow] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const data1 = [
-        { year: 2010, count: 10 },
-        { year: 2011, count: 20 },
-        { year: 2012, count: 15 },
-        { year: 2013, count: 25 },
-        { year: 2014, count: 22 },
-        { year: 2015, count: 30 },
-        { year: 2016, count: 28 },
-    ];
 
-
-
-    const changeShow = () => {
-        setShow((prevShow) => !prevShow);
-    };
+    useEffect(() => {
+        const storedStepIndex = localStorage.getItem('currentStepIndex');
+        console.log('Stored Step Index:', storedStepIndex); // Debug statement
+        if (storedStepIndex) {
+            const parsedStepIndex = parseInt(storedStepIndex);
+            console.log('Parsed Step Index:', parsedStepIndex); // Debug statement
+            setState(prevState => ({
+                ...prevState,
+                steps: prevState.steps.slice(0, parsedStepIndex + 1)
+            }));
+        }
+    }, []);
+   
 
     const { data, setData, post, processing, reset } = useForm({
         title: "",
@@ -52,14 +85,8 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
     const wallet = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.wallet);
     const incomeData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.totalIncome);
     const expenseData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.expense);
-    const noBalance = () => {
+ 
 
-
-
-
-    }
-
-    console.log(finance[0]?.wallet);
 
     const submit = (e) => {
         e.preventDefault();
@@ -99,14 +126,40 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
     };
 
 
+    const finishStepIndex = localStorage.getItem('currentStepIndex')
+    console.log(steps.length )
+
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
+          {
+            finishStepIndex < steps.length - 1 &&  <Joyride 
+            continuous
+            callback={(data) => {
+                const { action, index, status } = data;
+                if (status === STATUS.FINISHED) {
+                    localStorage.setItem('currentStepIndex', index.toString());
+                }
+            }}
+            run={run}
+            steps={steps}
+            hideCloseButton
+            scrollToFirstStep
+            showSkipButton
+            showProgress
+            styles={{
+                options: {
+                    primaryColor: '#1E429F', // Change to your desired button color
+                }
+            }}
+/>
 
+          }
+           
             <div className="flex flex-col sm:flex-row w-full  p-2">
                 <div className="sm:w-[80%] max-w-full  rounded-sm ">
-                    <div className="flex flex-col sm:flex-row sm:px-10 py-7 gap-5">
-                        <div className="bg-blue-800 sm:w-[24%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl">
+                    <div className="flex flex-col md:flex-row sm:flex-row sm:px-10  md:px-10 py-7 gap-5">
+                        <div className="bg-blue-800 sm:w-[24%]  md:w-[50%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl" id="step-1">
                             <div className="flex justify-between">
                                 <Wallet color="white" size={60}></Wallet>
 
@@ -125,7 +178,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 </div>
                             )}
                         </div>
-                        <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
+                        <div className="bg-[#eaddcf] sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out" id="step-2">
                             <div className="flex justify-between">
                                 <Banknote color="#020826" size={60}></Banknote>
                                 <a href="/income">
@@ -144,7 +197,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 {incomeData ? incomeData : 0}
                             </h5>
                         </div>
-                        <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
+                        <div className="bg-[#eaddcf] sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out " id="step-3">
                             <div className="flex justify-between">
                                 <Receipt color="#020826" size={60}></Receipt>
                                 <ChevronRight
@@ -162,7 +215,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 {expenseData !== undefined ? expenseData : 0}
                             </h5>
                         </div>
-                        <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
+                        <div className="bg-[#eaddcf] sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
                             <p className="text-[#020826] px-2 text-md mt-3 font-bold">
                                 Hello, {auth.user.name}
                             </p>
