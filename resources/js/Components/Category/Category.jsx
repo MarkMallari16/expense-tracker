@@ -82,20 +82,20 @@ function Category(props) {
     };
 
     return (
-        <div className="w-full mx-auto bg-white h-22  py-2 sm:rounded-md">
+        <div className="p-4 w-full mx-auto bg-white h-22  py-2 sm:rounded-md">
             <div className="border-b-2 px-2 border-[#fafafa] mb-3">
-                <p className="text-xl">Category</p>
+                <p className="text-xl font-bold">Goals</p>
             </div>
             <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
                 <div className="flex items-center">
                     <div className="" onClick={() => setShowModal(true)}>
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-orange-200">
-                            <span className="text-4xl">+</span>
+                        <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-500">
+                            <span className="text-4xl text-white">+</span>
                         </div>
 
                     </div>
                     <div className="w-50 py-2 px-2">
-                        <p className="text-lg font-bold">Add Category</p>
+                        <p className="text-lg font-bold">Add New Goal</p>
                     </div>
                 </div>
                 {goals?.map((goal) => (
@@ -229,7 +229,7 @@ function Category(props) {
                                         <button
                                             type="submit"
                                             // Add this line to call submitForm when the button is clicked
-                                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         >
                                             Save Changes
                                         </button>

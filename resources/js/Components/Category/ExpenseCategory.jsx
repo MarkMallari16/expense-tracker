@@ -4,9 +4,8 @@ import { Inertia } from "@inertiajs/inertia";
 
 function ExpenseCategory(props) {
   
-  
+    const [fundsModal,setFundsModal] = useState(false);
     const goals = props.goals;
-    
     const [form, setForm] = useState({
        name: "",
        users_image: ""
@@ -119,7 +118,7 @@ function ExpenseCategory(props) {
                                     {/*header*/}
                                     <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                                         <h3 className="text-3xl font-semibold">
-                                            New Goal
+                                            Add Category
                                         </h3>
                                         <button
                                             className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"

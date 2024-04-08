@@ -1,6 +1,8 @@
 import React from 'react';
 import Chart from 'chart.js/auto';
 import { Bar, Doughnut, Line, Pie,  } from 'react-chartjs-2';
+import ApexChart from "@/Components/ApexChart";
+
 function Graphs(props) {
   const calculateCategoryTotalPrices = (expenses) => {
     const categoryTotals = {};
@@ -56,7 +58,7 @@ function Graphs(props) {
   return (
     <div className='flex flex-col sm:flex-row sm:px-11 sm:gap-5 sm:py-4 '>
       <div className='w-full h-70 p-4 sm:w-7/12 bg-white rounded-md'>
-      <Bar data={chartData} options={{ responsive: true }} />
+      <ApexChart expenses={props.expenses}/>
       </div>
       <div className='w-full sm:w-5/12 bg-white rounded-md'>
         <div className='flex'>
