@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Income::observe(IncomeObserver::class);
+        Expense::observe(ExpenseObserver::class);
     }
 }

@@ -78,25 +78,29 @@ class ExpenseController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'price' => 'required|integer'
+            'price' => 'required|integer',
+            'recurring' => 'boolean', // Add validation for recurring
+            'recurring_type' => 'nullable|string', // Add validation for recurring_type
+            'start_date' => 'nullable|date', // Add validation for start_date
+            'end_date' => 'nullable|date', // Add validation for end_date
         ]);
-
+    
         $user = $request->user();
         $walletBalance = $user->finance->wallet;
-
+    
         // Check if the user has enough balance
         if ($walletBalance >= $validated['price']) {
             // Deduct expense from wallet
             $user->finance->wallet -= $validated['price'];
-
+    
             // Update total expenses
             $user->finance->expense += $validated['price'];
-
+    
             $user->finance->save();
-
+    
             // Create new expense
             $user->expense()->create($validated);
-
+    
             return redirect(route('expenses.store'))->with('success', 'Expense added successfully!');
         } else {
             return redirect(route('expenses.store'))->with('error', 'Insufficient funds!');
