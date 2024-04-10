@@ -9,7 +9,7 @@ const ApexChart = ({ expenses }) => {
     useEffect(() => {
         const currentDate = new Date();
         let filteredData = [];
-    
+
         switch (selectedOption) {
             case 'Yesterday':
                 filteredData = expenses.filter((expense) => {
@@ -52,7 +52,7 @@ const ApexChart = ({ expenses }) => {
             default:
                 filteredData = expenses;
         }
-    
+
         // Prepare chart data based on filter option
         let chartData = [];
         if (selectedOption === 'Today' || selectedOption === 'Yesterday') {
@@ -75,13 +75,13 @@ const ApexChart = ({ expenses }) => {
                 y: aggregatedExpenses[date]
             }));
         }
-    
+
         // Render chart
         if (chartRef.current && chartData.length > 0) {
             renderChart(chartData);
         }
     }, [selectedOption, expenses]);
-    
+
     const renderChart = (data) => {
         const options = {
             chart: {
@@ -149,7 +149,7 @@ const ApexChart = ({ expenses }) => {
                 show: false,
             },
         };
-    
+
         try {
             // Check if chartRef.current is available
             if (chartRef.current) {
@@ -170,19 +170,21 @@ const ApexChart = ({ expenses }) => {
     const handleFilterChange = (e) => {
         setSelectedOption(e.target.value);
         setChartData([]); // Clear chart data to force re-render
-    }; 
+    };
     console.log(chartData)
 
     return (
-        <div className="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+        <div className="w-full bg-white rounded-lg  dark:bg-gray-800 p-2 md:p-6">
+           
             <div ref={chartRef} className='w-full'></div>
             <div className="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
                 <div className="flex justify-between items-center pt-5">
+                <div className='text-lg font-medium'>Expense Statistics</div>
                     <div className="relative">
                         <select
                             value={selectedOption}
                             onChange={handleFilterChange}
-                            className="block w-full py-2 pl-3 pr-10 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            className="block w-full py-2 pl-3 pr-10 foc border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                         >
                             <option value="">Select</option>
                             <option value="Yesterday">Yesterday</option>
