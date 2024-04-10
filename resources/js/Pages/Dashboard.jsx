@@ -9,13 +9,8 @@ import Graphs from "@/Components/Category/Graphs";
 import Card from "@/Components/Card";
 import { ToastContainer, toast } from 'react-toastify';
 import Joyride, { STATUS } from "react-joyride";
-<<<<<<< HEAD
 import incomechart from "../../../public/images/incomechart.png"
 import expensechart from "../../../public/images/expensechart.png"
-=======
-
-
->>>>>>> main
 import Transaction from "@/Components/Transaction/Transaction";
 import {
     Wallet,

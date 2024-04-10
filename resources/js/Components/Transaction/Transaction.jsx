@@ -194,11 +194,7 @@ function Transaction({ expenses, updateExpenses }) {
       <div className="flex justify-between mb-2 ">
 
         <div className="mt-4 relative w-full flex items-center">
-<<<<<<< HEAD
           <div className='ms-4 absolute'>
-=======
-          <div className='ms-3 absolute'>
->>>>>>> main
             <SearchIcon /> {/* Adjusted margin */}
           </div>
           <DebouncedInput
