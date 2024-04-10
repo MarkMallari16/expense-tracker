@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 
 
 
-function CardStack({monthlyIncomeSum, yearlyIncome}) {
+function CardStack({monthlyIncomeSum, yearlyIncome, finance}) {
     const monthlyIncome = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(monthlyIncomeSum);
     const YearlyPotentialIncome = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(yearlyIncome);
+    const Finance = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.wallet);
+    console.log(finance[0].wallet)
 
-    console.log(yearlyIncome)
     const cardData = [
         {
           id: 1,
           content: 'Wallet',
-          value: '15,000',
+          value: Finance,
           bgColor: ['bg-[#192655]', 'bg-[#2E3D88]', 'bg-[#3F4EA9]'], // Dark, Light, Lighter
           textColor: ['text-white', 'text-gray-300', 'text-gray-400'], // Dark, Light, Lighter text colors
         },

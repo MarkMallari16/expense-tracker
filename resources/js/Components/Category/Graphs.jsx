@@ -73,8 +73,6 @@ function Graphs(props) {
                   },
                 ],
               }}
-
-
             />
           </div>
           <div className='p-3 flex flex-col justify-center'>

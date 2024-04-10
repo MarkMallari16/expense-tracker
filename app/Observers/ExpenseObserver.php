@@ -3,47 +3,50 @@
 namespace App\Observers;
 
 use App\Models\Expense;
-use App\Models\ExpenseHistory;
 
 class ExpenseObserver
 {
     /**
-     * Handle the expense "created" event.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return void
+     * Handle the Expense "created" event.
      */
     public function created(Expense $expense)
     {
-        // Add the expense to the expense history
-        ExpenseHistory::create([
-            'title' => $expense->title,
-            'category' => $expense->category,
-            'price' => $expense->price,
-            'user_id' => $expense->user_id,
-            // Add other fields if needed
-        ]);
+        if ($expense->recurring === false) {
+            $finance = $expense->user->finance()->firstOrCreate();
+            $finance->increment('expense', $expense->price);
+            $finance->decrement('wallet', $expense->price);
+        }
     }
 
     /**
-     * Handle the expense "updated" event.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return void
+     * Handle the Expense "updated" event.
      */
     public function updated(Expense $expense)
     {
-        // Handle the expense updated event if needed
+        //
     }
 
     /**
-     * Handle the expense "deleted" event.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return void
+     * Handle the Expense "deleted" event.
      */
     public function deleted(Expense $expense)
     {
-        // Handle the expense deleted event if needed
+        //
+    }
+
+    /**
+     * Handle the Expense "restored" event.
+     */
+    public function restored(Expense $expense)
+    {
+        //
+    }
+
+    /**
+     * Handle the Expense "force deleted" event.
+     */
+    public function forceDeleted(Expense $expense)
+    {
+        //
     }
 }

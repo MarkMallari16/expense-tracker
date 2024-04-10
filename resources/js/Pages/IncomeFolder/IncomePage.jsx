@@ -12,7 +12,7 @@ import { Search } from 'lucide-react';
 
 import ExpenseHistory from './ExpenseHistory';
 
-function IncomePage({ auth, income, monthlyIncomeSum, yearlyIncome }) {
+function IncomePage({ auth, income, monthlyIncomeSum, yearlyIncome, finance }) {
 
     console.log(yearlyIncome)
     const [showModal, setShowModal] = useState(false);
@@ -86,7 +86,7 @@ function IncomePage({ auth, income, monthlyIncomeSum, yearlyIncome }) {
 
                             <div className="p-4 text-white bg-white-500 rounded shadow h-60">
 
-                                <CardStack monthlyIncomeSum={monthlyIncomeSum} yearlyIncome={yearlyIncome}/> {/* Use the CardStack component here */}
+                                <CardStack monthlyIncomeSum={monthlyIncomeSum} yearlyIncome={yearlyIncome} finance={finance}/> {/* Use the CardStack component here */}
                             </div>
 
                             {/* Section 2 as a button */}

@@ -185,7 +185,11 @@ const ApexChart = ({ expenses }) => {
                         <select
                             value={selectedOption}
                             onChange={handleFilterChange}
+<<<<<<< HEAD
                             className="block w-full py-2 pl-3 pr-10 foc border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+=======
+                            className="block w-full py-2 pl-3 pr-10  border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+>>>>>>> main
                         >
                             <option value="">Select</option>
                             <option value="Yesterday">Yesterday</option>

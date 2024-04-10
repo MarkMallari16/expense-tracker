@@ -3,14 +3,14 @@ import CardStack from './CardStack';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Pie } from 'react-chartjs-2';
 import RecurringExpenses from './RecurringExpenses';
-import ExpenseCalender from './Profile/ExpenseCalender';
+import ExpenseCalendar from './Profile/ExpenseCalender';
 import { useForm } from "@inertiajs/react";
 import ExpenseHistory from './ExpenseHistory';
 import ExpenseCategory from '@/Components/Category/ExpenseCategory';
 
-function Expense({ auth, expenses, expenseCategory }) {
-    console.log(expenseCategory);
-
+function Expense({ auth, expenses,expenseCategory}) {
+    console.log(expenseCategory );
+  
     const [showModal, setShowModal] = useState(false);
     const { data: formData, setData: setFormData, post, reset } = useForm({
         title: "",
@@ -18,10 +18,10 @@ function Expense({ auth, expenses, expenseCategory }) {
         price: "",
         recurring: false,
         endDate: "",
-        recurringType: "Monthly",
+        recurring_type: "Monthly",
     });
 
-
+ 
 
 
 
@@ -45,13 +45,17 @@ function Expense({ auth, expenses, expenseCategory }) {
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
-                // More colors as needed
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
-                // More borders as needed
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1,
         }],
@@ -67,7 +71,8 @@ function Expense({ auth, expenses, expenseCategory }) {
                         </div>
                         <div className="w-full space-y-4 lg:col-span-6">
                             <div className="p-4 text-white bg-white-500 rounded shadow h-60">
-                                <CardStack />
+
+                                <CardStack expenses={expenses} /> {/* Use the CardStack component here */}
                             </div>
                             <button
                                 className="flex justify-center items-center h-24 p-4 text-white bg-blue-800 rounded shadow w-full"
@@ -80,11 +85,12 @@ function Expense({ auth, expenses, expenseCategory }) {
                                     <Pie data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
                                 </div>
                             </div>
-                            <ExpenseCalender expenses={expenses} />
+                            <ExpenseCalendar expenses={expenses} />
                         </div>
                         <div className="flex flex-col space-y-4 lg:col-span-3">
                             <div className="h-auto p-4 text-black bg-white-500 rounded shadow">
-                                <ExpenseCategory />
+                                <ExpenseCategory expenseCategory={expenseCategory} />
+
                             </div>
                             <div className="flex-grow p-4 text-black bg-white-500 rounded shadow">
                                 <ExpenseHistory expenses={expenses} />
@@ -158,6 +164,9 @@ function Expense({ auth, expenses, expenseCategory }) {
                                                             <option>Bills</option>
                                                             <option>Transport</option>
                                                         </select>
+                                                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -180,6 +189,11 @@ function Expense({ auth, expenses, expenseCategory }) {
                                                             })
                                                         }
                                                     />
+
+
+
+
+
                                                 </div>
                                             </div>
                                             <div className="relative p-6 flex-auto mt-5">
@@ -272,7 +286,7 @@ function Expense({ auth, expenses, expenseCategory }) {
 
 
                                             {/* New dropdown */}
-
+                                       
 
 
 
@@ -282,7 +296,7 @@ function Expense({ auth, expenses, expenseCategory }) {
 
 
                                         {/*footer*/}
-
+                                       
                                     </div>
                                 </div>
                             </form>

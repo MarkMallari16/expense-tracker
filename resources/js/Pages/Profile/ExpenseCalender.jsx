@@ -27,7 +27,7 @@ function ExpenseCalendar({ expenses }) {
     totalExpensesByMonth[month] += parseFloat(expense.price);
   });
 
-  const dateCellRender = (value) => {
+  const cellRender = (value) => {
     const date = value.format('YYYY-MM-DD');
     const totalExpense = totalExpensesByDate[date] || [];
     if (totalExpense.length > 0) {
@@ -67,24 +67,22 @@ function ExpenseCalendar({ expenses }) {
 
   return (
     <div>
-      <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
+      <Calendar cellRender={cellRender} monthCellRender={monthCellRender}/>
       <Modal
         title={<h3 className='text-2xl'>Expenses for {selectedDate}</h3>}
-        visible={visible}
+        open={visible}
         onCancel={handleModalCancel}
         footer={null}
       >
         <ul className='mt-3'>
           {selectedDateExpenses.map((expense, index) => (
-            <div className=' flex items-center gap-3 mb-2'>
+            <div className=' flex items-center gap-3 mb-2' key={index}>
               <div className='bg-gray-200 p-1 rounded-md'>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-          </svg>
-
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                </svg>
               </div>
-
-            <li className='text-sm' key={index}>{expense.title} - {expense.price}</li>
+              <li className='text-sm'>{expense.title} - {expense.price}</li>
             </div>
           ))}
         </ul>

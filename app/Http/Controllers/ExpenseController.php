@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Observers\ExpenseObserver;
 
 use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use App\Models\Finance;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -27,6 +29,18 @@ class ExpenseController extends Controller
             'finance' => $finance,
         ]);
     }
+
+    public function show()
+    {
+        $userId = Auth::id();
+        $expenses = Expense::where('user_id', $userId)->get();
+        $finance = Finance::where('user_id', $userId)->get();
+        
+        return Inertia::render('Expense', [
+            'expenses' => $expenses,
+            'finance' => $finance,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -43,8 +57,10 @@ class ExpenseController extends Controller
         $userId = Auth::id();
         $expenses = Expense::where('user_id', $userId)->get();
         $finance = Finance::where('user_id', $userId)->get();
+        $expenseCategory = ExpenseCategory::all();
         return Inertia::render('Expense', [
-            'expenses' => $expenses
+            'expenses' => $expenses,
+            'expenseCategory' => $expenseCategory
         ]);
     }
 
@@ -79,13 +95,13 @@ class ExpenseController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'price' => 'required|integer',
-            'recurring' => 'boolean', // Add validation for recurring
-            'recurring_type' => 'nullable|string', // Add validation for recurring_type
-            'start_date' => 'nullable|date', // Add validation for start_date
-            'end_date' => 'nullable|date', // Add validation for end_date
+            'recurring' => 'boolean',
+            'recurring_type' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
         ]);
     
-        $user = $request->user();
+        $user = Auth::user();
         $walletBalance = $user->finance->wallet;
     
         // Check if the user has enough balance
@@ -96,24 +112,25 @@ class ExpenseController extends Controller
             // Update total expenses
             $user->finance->expense += $validated['price'];
     
+            // Save the wallet and expense changes
             $user->finance->save();
     
-            // Create new expense
-            $user->expense()->create($validated);
+            // Create new expense with associated user ID
+            $expense = $user->expense()->create($validated);
     
             return redirect(route('expenses.store'))->with('success', 'Expense added successfully!');
         } else {
             return redirect(route('expenses.store'))->with('error', 'Insufficient funds!');
         }
     }
+    
+    
+
 
     /**
      * Display the specified resource.
      */
-    public function show(expense $expense)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

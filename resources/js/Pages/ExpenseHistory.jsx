@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Download, Search } from 'lucide-react';
 import DropdownMenu from './DropdownMenu';
+import { format, parseISO } from 'date-fns';
 
 function ExpenseHistory({expenses}) {
   const [history, setHistory] = useState(expenses);

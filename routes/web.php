@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoalsController;
 use App\Http\Controllers\IncomeController;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\FinancialSetupController;
 
 use Illuminate\Support\Facades\Route;
@@ -56,7 +57,9 @@ Route::get('/goals/{goal}/edit', [GoalsController::class, 'edit'])->name('goals.
 Route::put('/goals/{goal}', [GoalsController::class, 'update'])->name('goals.update');
 Route::delete('/goals/{goal}', [GoalsController::class, 'destroy'])->name('goals.destroy');
 
-Route::post('/expense_categories', [ExpenseCategoryController::class, 'store'])->name('expense_categories.store');
+Route::post('/expense_categories', [ExpenseCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('expense_categories.store');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -71,7 +74,10 @@ Route::resource('expenses', ExpenseController::class)
 
 
 // expense page route
-Route::get('/expense', [ExpenseController::class, 'expensePage'])->middleware(['auth', 'verified'])->name("expense");;
+
+Route::get('/expense', [ExpenseController::class, 'expensePage'])->middleware(['auth', 'verified'])->name("expense");
+;
+
 
 
 require __DIR__ . '/auth.php';

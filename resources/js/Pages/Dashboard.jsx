@@ -9,8 +9,13 @@ import Graphs from "@/Components/Category/Graphs";
 import Card from "@/Components/Card";
 import { ToastContainer, toast } from 'react-toastify';
 import Joyride, { STATUS } from "react-joyride";
+<<<<<<< HEAD
 import incomechart from "../../../public/images/incomechart.png"
 import expensechart from "../../../public/images/expensechart.png"
+=======
+
+
+>>>>>>> main
 import Transaction from "@/Components/Transaction/Transaction";
 import {
     Wallet,
@@ -179,8 +184,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 </div>
                             )}
                         </div>
-                        <div className="bg-slate-100 sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out" id="step-2">
-
+                        <div className="bg-slate-200 sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out" id="step-2">
                             <div className="flex justify-between">
 
                                 <Banknote color="#020826" size={60}></Banknote>
@@ -195,7 +199,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 
                             </div>
 
-                            <p className="text-black px-2 text-xl mt-3 font-bold">
+                            <p className="text-gray-500 px-2 text-xl mt-3 font-bold">
                                 Income
                             </p>
                             <h5 className="text-green-600 font-bold text-2xl px-2">
@@ -206,7 +210,6 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                         <div className="bg-slate-200 sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out " id="step-3">
                             <div className="flex justify-between">
                                 <Receipt color="#020826" size={60}></Receipt>
-                                <img src={expensechart} alt="chart" className="w-[150px]" />
                                 <ChevronRight
                                     color="#020826"
                                     size={20}
@@ -216,7 +219,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
 
                             </div>
 
-                            <p className="text-black px-2 text-xl mt-3 font-bold">
+                            <p className="text-gray-500 px-2 text-xl mt-3 font-bold">
                                 Expenses
                             </p>
                             <h5 className="text-red-600 font-bold text-2xl px-2">
@@ -239,7 +242,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                         <p className="p-5 font-medium text-xl">Transactions</p>
                         <div className="flex justify-end items-center pr-2 gap-3">
 
-                            <DownloadBtn expense={expenses} />
+                            <DownloadBtn expense={expenses}/>
 
                             <span
                                 onClick={() => setShowModal(true)}

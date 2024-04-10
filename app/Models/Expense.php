@@ -15,10 +15,10 @@ class Expense extends Model
         'title',
         'category',
         'price',
-        'recurring', // Add recurring field
-        'recurring_type', // Add recurring_type field
-        'start_date', // Add start_date field
-        'end_date', // Add end_date field
+        'recurring', 
+        'recurring_type', 
+        'start_date', 
+        'end_date', 
     ];
 
 

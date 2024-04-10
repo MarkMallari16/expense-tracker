@@ -26,12 +26,12 @@ function FinancialSetupPage() {
 
   const handleSubmit = (event) => { 
     event.preventDefault();
-    if (step < 4) {
+    if (step < 2) {
       setStep(step + 1);
     } else {
       Inertia.post('/financial/setup', {
         monthlySalary,
-        recurringBills,
+
         desiredBudget,
         budgetType,
       });
@@ -49,7 +49,7 @@ function FinancialSetupPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
     <div className="w-full max-w-md p-8 bg-white rounded shadow-md">
         <div className="flex items-center justify-between mb-8">
-            <div className="text-gray-600">Question {step}/5</div>
+            <div className="text-gray-600">Question {step}/3</div>
             <div className="w-10 h-1 bg-blue-500 rounded" style={{ width: `${(step / 7) * 100}%` }}></div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -69,73 +69,9 @@ function FinancialSetupPage() {
                 </div>
             )}
 
-            {step === 2 && (
-                recurringBills.map((bill, index) => (
-                    <div key={index} className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700">Recurring Bill {index + 1}</label>
-                      <div className="flex flex-wrap mb-2 -mx-3">
-                        <div className="w-full px-3 mb-2 md:w-1/2 md:mb-0">
-                          <input
-                            type="text"
-                            name="name"
-                            value={bill.name}
-                            onChange={(e) => handleBillChange(index, e)}
-                            placeholder="Name of the bill"
-                            className="block w-full border-gray-300 rounded-md shadow-sm"
-                          />
-                        </div>
-                        <div className="w-full px-3 md:w-1/2">
-                          <input
-                            type="number"
-                            name="amount"
-                            value={bill.amount}
-                            onChange={(e) => handleBillChange(index, e)}
-                            placeholder="Amount"
-                            className="block w-full border-gray-300 rounded-md shadow-sm"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap mb-6 -mx-3">
-                        <div className="w-full px-3 mb-2 md:w-1/2 md:mb-0">
-                          <input
-                            type="date"
-                            name="start"
-                            value={bill.start}
-                            onChange={(e) => handleBillChange(index, e)}
-                            className="block w-full border-gray-300 rounded-md shadow-sm"
-                          />
-                        </div>
-                        <div className="w-full px-3 md:w-1/2">
-                          <input
-                            type="date"
-                            name="end"
-                            value={bill.end}
-                            onChange={(e) => handleBillChange(index, e)}
-                            className="block w-full border-gray-300 rounded-md shadow-sm"
-                          />
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => removeBill(index)}
-                        className="text-red-600 hover:text-red-800"
-                      >
-                        Remove Bill
-                      </button>
-                    </div>
-                  )).concat(
-                    <button
-                      key="add-bill"
-                      type="button"
-                      onClick={addBill}
-                      className="mt-2 text-blue-600 hover:text-blue-800"
-                    >
-                      Add Another Bill
-                    </button>
-                  )
-            )}
+          
 
-            {step === 3 && (
+            {step === 2 && (
                 <div>
                 <label htmlFor="desiredBudget" className="block text-sm font-medium text-gray-700">Desired Budget</label>
                 <input
@@ -146,11 +82,8 @@ function FinancialSetupPage() {
                   id="desiredBudget"
                   placeholder="30,000"
                 />
-              </div>
-            )}
-             {step === 4 && (
-                 <div>
-                 <label htmlFor="budgetType" className="block text-sm font-medium text-gray-700">Budget Type</label>
+
+<label htmlFor="budgetType" className="block text-sm font-medium text-gray-700">Budget Type</label>
                  <select
                    value={budgetType}
                    onChange={(e) => setBudgetType(e.target.value)}
@@ -162,17 +95,18 @@ function FinancialSetupPage() {
                    <option value="weekly">Weekly</option>
                    <option value="monthly">Monthly</option>
                  </select>
-               </div>
+              </div>
             )}
+         
             {
-                step === 5 && (
+                step === 3 && (
                     <p className='p-3 bg-green-300 rounded-sm'>Thank you for submmiting your information! 🥳</p>
                 )
             }
 
             {/* Repeat similar JSX for other steps/questions */}
             {
-                step < 5 &&  (
+                step < 3 &&  (
                     <div className="flex justify-end mt-6">
                     <button
                         type="submit"
