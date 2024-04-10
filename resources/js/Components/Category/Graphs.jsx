@@ -77,11 +77,11 @@ function Graphs(props) {
 
             />
           </div>
-          <div className='p-3 flex flex-col justify-center items-center'>
+          <div className='p-3 flex flex-col justify-center'>
             {result.map((item, index) => (
-              <p key={index}>
+              <div key={index}>
                 {item.category}: {item.total}
-              </p>
+              </div>
             ))}
           </div>
         </div>

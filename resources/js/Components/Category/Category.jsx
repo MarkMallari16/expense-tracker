@@ -87,12 +87,9 @@ function Category(props) {
                 <p className="text-xl font-bold">Goals</p>
             </div>
             <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
-                <div className="flex items-center">
-                    <div className="" onClick={() => setShowModal(true)}>
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-500">
-                            <span className="text-4xl text-white">+</span>
-                        </div>
-
+                <div className="flex" onClick={() => setShowModal(true)}>
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-orange-200">
+                        <span className="text-4xl">+</span>
                     </div>
                     <div className="w-50 py-2 px-2">
                         <p className="text-lg font-bold">Add New Goal</p>

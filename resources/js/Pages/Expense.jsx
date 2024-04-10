@@ -8,7 +8,9 @@ import { useForm } from "@inertiajs/react";
 import ExpenseHistory from './ExpenseHistory';
 import ExpenseCategory from '@/Components/Category/ExpenseCategory';
 
-function Expense({ auth, expenses }) {
+function Expense({ auth, expenses, expenseCategory }) {
+    console.log(expenseCategory);
+
     const [showModal, setShowModal] = useState(false);
     const { data: formData, setData: setFormData, post, reset } = useForm({
         title: "",
@@ -19,6 +21,11 @@ function Expense({ auth, expenses }) {
         recurringType: "Monthly",
     });
 
+
+
+
+
+    console.log(expenses)
     const submit = (e) => {
         e.preventDefault();
         post(route("expenses.store"), {
@@ -258,7 +265,24 @@ function Expense({ auth, expenses }) {
                                                     Save Changes
                                                 </button>
                                             </div>
+
+
+
+
+
+
+                                            {/* New dropdown */}
+
+
+
+
+
                                         </div>
+
+
+
+                                        {/*footer*/}
+
                                     </div>
                                 </div>
                             </form>

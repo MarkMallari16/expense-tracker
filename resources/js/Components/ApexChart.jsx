@@ -130,7 +130,7 @@ const ApexChart = ({ expenses }) => {
                 {
                     name: "Expenses",
                     data: data,
-                    color: "#FF0000",
+                    color: "#dc2626",
                 },
             ],
             xaxis: {
@@ -166,9 +166,10 @@ const ApexChart = ({ expenses }) => {
             console.error("Error rendering chart:", error);
         }
     };
-
+    //console.log
     const handleFilterChange = (e) => {
         setSelectedOption(e.target.value);
+
         setChartData([]); // Clear chart data to force re-render
     };
     console.log(chartData)
