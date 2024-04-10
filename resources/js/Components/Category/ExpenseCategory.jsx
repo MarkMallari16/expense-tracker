@@ -77,7 +77,7 @@ function ExpenseCategory(props) {
             <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
                 <div className="flex items-center">
                     <div className="" onClick={() => setShowModal(true)}>
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-500">
+                        <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-800 text-white">
                             <span className="text-4xl">+</span>
                         </div>
 

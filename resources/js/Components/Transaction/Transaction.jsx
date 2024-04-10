@@ -193,14 +193,14 @@ function Transaction({ expenses, updateExpenses }) {
 
       <div className="flex justify-between mb-2 ">
 
-        <div className="mt-4 relative w-full flex items-center">
+        <div className=" relative w-full flex items-center">
           <div className='ms-4 absolute'>
             <SearchIcon /> {/* Adjusted margin */}
           </div>
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}
-            className="rounded-md pl-8 py-2 bg-transparent outline-none w-full focus:w-1/3 duration-300" // Adjusted padding
+            className="rounded-md pl-10 py-2 bg-transparent outline-none w-full focus:w-1/3 duration-300" // Adjusted padding
             placeholder="Search all columns..."
           />
         </div>

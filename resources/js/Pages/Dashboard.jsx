@@ -9,8 +9,7 @@ import Graphs from "@/Components/Category/Graphs";
 import Card from "@/Components/Card";
 import { ToastContainer, toast } from 'react-toastify';
 import Joyride, { STATUS } from "react-joyride";
-import incomechart from "../../../public/images/incomechart.png"
-import expensechart from "../../../public/images/expensechart.png"
+
 import Transaction from "@/Components/Transaction/Transaction";
 import {
     Wallet,
@@ -65,7 +64,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
 
 
 
-    
+
     console.log(steps)
 
     const [show, setShow] = useState(false);
@@ -177,7 +176,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
             <div className="flex flex-col sm:flex-row w-full  p-2">
                 <div className="sm:w-[80%] max-w-full  rounded-sm ">
                     <div className="flex flex-col md:flex-row sm:flex-row sm:px-10  md:px-10 py-7 gap-5">
-                        <div className="bg-blue-700 sm:w-[24%]  md:w-[50%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl" id="step-1">
+                        <div className="bg-blue-800 sm:w-[24%]  md:w-[50%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl" id="step-1">
                             <div className="flex justify-between">
                                 <Wallet color="white" size={60}></Wallet>
 
@@ -200,7 +199,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                             <div className="flex justify-between">
 
                                 <Banknote color="#020826" size={60}></Banknote>
-                                <img src={incomechart} alt="chart" className="w-[150px]" />
+
                                 <a href="/income">
                                     <ChevronRight
                                         color="#020826"
@@ -208,7 +207,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                         className="cursor-pointer transition "
                                     />
                                 </a>
-                                
+
                             </div>
 
                             <p className="text-gray-500 px-2 text-xl mt-3 font-bold">
@@ -251,10 +250,13 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
 
 
                     <div className=" bg-white sm:mx-10 ">
-                        <p className="p-5 font-medium text-xl">Transactions</p>
+                        <div className="p-5 flex items-center justify-between ">
+                            <div className="font-medium text-xl">Transactions</div>
+                            {/** <div className="text-gray-500 cursor-pointer">View all</div> pag gusto niyo may page ung transaction */}
+                        </div>
                         <div className="flex justify-end items-center pr-2 gap-3">
 
-                            <DownloadBtn expense={expenses}/>
+                            <DownloadBtn expense={expenses} />
 
                             <span
                                 onClick={() => setShowModal(true)}
@@ -350,11 +352,11 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                                             Transport
                                                         </option>
                                                     </select>
-                                                   
+
                                                 </div>
                                             </div>
 
-                                            
+
                                             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                                 <label
                                                     className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

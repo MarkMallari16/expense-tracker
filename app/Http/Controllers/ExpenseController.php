@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\JsonResponse;
+
 
 class ExpenseController extends Controller
 {
@@ -81,6 +81,7 @@ class ExpenseController extends Controller
         }
 
         $user = auth()->user();
+        
         $goal = $user->expenseCategory()->create([
             'name' => $request->input('name'),
             'users_image' => $users_image,
