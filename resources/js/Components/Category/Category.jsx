@@ -23,7 +23,7 @@ function Category(props) {
     const [showModal, setShowModal] = useState(false);
 
 
-    
+
     const submitForm = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
 
@@ -92,12 +92,11 @@ function Category(props) {
             <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
                 <div className="flex items-center">
                     <div className="" onClick={() => setShowModal(true)}>
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-500">
-                            <span className="text-4xl text-white">+</span>
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
+                            <span className="text-xl md:text-4xl text-white">+</span>
                         </div>
-
                     </div>
-                    <div className="w-50 py-2 px-2">
+                    <div className="flex-grow py-2 px-2 md:w-2/3">
                         <p className="text-md font-bold">Add New Goal</p>
                     </div>
                 </div>
@@ -251,7 +250,7 @@ function Category(props) {
                             {/* Modal content for adding/viewing funds */}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-96 bg-white outline-none focus:outline-none">
 
-                              
+
 
 
                                 <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
@@ -270,13 +269,13 @@ function Category(props) {
                                         <img src={`storage/${fundsModal.goal.users_image}`} alt="" className="w-40 h-40 rounded-full" />
                                     </div>
                                     <div className="flex justify-center flex-col pt-4 px-8">
-                                    <p className="text-center mb-2">{`Current balance ${fundsModal.goal.balance?.toLocaleString()}`}</p>
-                                    <progress value={fundsModal.goal.balance} className="w-80" max={fundsModal.goal.target_amount} />                                                         
-                                    {fundsModal.goal.balance >= fundsModal.goal.target_amount && <p className="pt-1 text-center">You accomplished your goal! 🥳</p>}
-                                        
+                                        <p className="text-center mb-2">{`Current balance ${fundsModal.goal.balance?.toLocaleString()}`}</p>
+                                        <progress value={fundsModal.goal.balance} className="w-80" max={fundsModal.goal.target_amount} />
+                                        {fundsModal.goal.balance >= fundsModal.goal.target_amount && <p className="pt-1 text-center">You accomplished your goal! 🥳</p>}
+
                                     </div>
                                 </div>
-                            
+
                                 <div className="relative p-6 flex-auto">
                                     <form onSubmit={(e) => addFundsToGoal(e, e.target.balance.value)}>
                                         <input

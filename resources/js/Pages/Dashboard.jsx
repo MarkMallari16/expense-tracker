@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import Graphs from "@/Components/Category/Graphs";
 import Card from "@/Components/Card";
 import { ToastContainer, toast } from 'react-toastify';
-import Joyride, {STATUS} from "react-joyride";
+import Joyride, { STATUS } from "react-joyride";
 
 
 import Transaction from "@/Components/Transaction/Transaction";
@@ -23,17 +23,18 @@ import {
 } from "lucide-react";
 import { Dropdown } from "flowbite-react";
 import Budget from "@/Components/BudgetFolder/Budget";
+import DownloadBtn from "@/Components/Transaction/DownloadBtn";
 export default function Dashboard({ auth, expenses, goals, finance }) {
     console.log("kani", finance[0]);
 
-  
-    
-    const [{run, steps}, setState] = useState({
+
+
+    const [{ run, steps }, setState] = useState({
         run: true,
         steps: [
             {
                 content: <h2>Let's begin our journey</h2>,
-                locale: {skip: <strong>SKIP</strong>},
+                locale: { skip: <strong>SKIP</strong> },
                 placement: 'center',
                 target: 'body'
             },
@@ -75,7 +76,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
             }));
         }
     }, []);
-   
+
 
     const { data, setData, post, processing, reset } = useForm({
         title: "",
@@ -85,7 +86,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
     const wallet = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.wallet);
     const incomeData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.totalIncome);
     const expenseData = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(finance[0]?.expense);
- 
+
 
 
     const submit = (e) => {
@@ -127,39 +128,39 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
 
 
     const finishStepIndex = localStorage.getItem('currentStepIndex')
-    console.log(steps.length )
+    console.log(steps.length)
 
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
-          {
-            finishStepIndex < steps.length - 1 &&  <Joyride 
-            continuous
-            callback={(data) => {
-                const { action, index, status } = data;
-                if (status === STATUS.FINISHED) {
-                    localStorage.setItem('currentStepIndex', index.toString());
-                }
-            }}
-            run={run}
-            steps={steps}
-            hideCloseButton
-            scrollToFirstStep
-            showSkipButton
-            showProgress
-            styles={{
-                options: {
-                    primaryColor: '#1E429F', // Change to your desired button color
-                }
-            }}
-/>
+            {
+                finishStepIndex < steps.length - 1 && <Joyride
+                    continuous
+                    callback={(data) => {
+                        const { action, index, status } = data;
+                        if (status === STATUS.FINISHED) {
+                            localStorage.setItem('currentStepIndex', index.toString());
+                        }
+                    }}
+                    run={run}
+                    steps={steps}
+                    hideCloseButton
+                    scrollToFirstStep
+                    showSkipButton
+                    showProgress
+                    styles={{
+                        options: {
+                            primaryColor: '#1E429F', // Change to your desired button color
+                        }
+                    }}
+                />
 
-          }
-           
+            }
+
             <div className="flex flex-col sm:flex-row w-full  p-2">
                 <div className="sm:w-[80%] max-w-full  rounded-sm ">
                     <div className="flex flex-col md:flex-row sm:flex-row sm:px-10  md:px-10 py-7 gap-5">
-                        <div className="bg-blue-800 sm:w-[24%]  md:w-[50%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl" id="step-1">
+                        <div className="bg-blue-700 sm:w-[24%]  md:w-[50%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl" id="step-1">
                             <div className="flex justify-between">
                                 <Wallet color="white" size={60}></Wallet>
 
@@ -178,7 +179,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 </div>
                             )}
                         </div>
-                        <div className="bg-[#eaddcf] sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out" id="step-2">
+                        <div className="bg-slate-200 sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out" id="step-2">
                             <div className="flex justify-between">
                                 <Banknote color="#020826" size={60}></Banknote>
                                 <a href="/income">
@@ -190,14 +191,15 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 </a>
                             </div>
 
-                            <p className="text-[#020826] px-2 text-xl mt-3 font-bold">
+                            <p className="text-gray-500 px-2 text-xl mt-3 font-bold">
                                 Income
                             </p>
-                            <h5 className="text-[#020826] font-bold text-2xl px-2">
+                            <h5 className="text-green-600 font-bold text-2xl px-2">
                                 {incomeData ? incomeData : 0}
                             </h5>
+
                         </div>
-                        <div className="bg-[#eaddcf] sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out " id="step-3">
+                        <div className="bg-slate-200 sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out " id="step-3">
                             <div className="flex justify-between">
                                 <Receipt color="#020826" size={60}></Receipt>
                                 <ChevronRight
@@ -208,14 +210,14 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 />
                             </div>
 
-                            <p className="text-[#020826] px-2 text-xl mt-3 font-bold">
+                            <p className="text-gray-500 px-2 text-xl mt-3 font-bold">
                                 Expenses
                             </p>
                             <h5 className="text-red-600 font-bold text-2xl px-2">
                                 {expenseData !== undefined ? expenseData : 0}
                             </h5>
                         </div>
-                        <div className="bg-[#eaddcf] sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
+                        <div className="bg-slate-200 sm:w-[24%]  md:w-[50%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
                             <p className="text-[#020826] px-2 text-md mt-3 font-bold">
                                 Hello, {auth.user.name}
                             </p>
@@ -227,15 +229,19 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                     <Graphs expenses={expenses} />
 
 
-                    <div className=" bg-white sm:mx-10">
-                        <div className="flex justify-between items-center pr-2">
-                            <p className="p-5">Transactions</p>
+                    <div className=" bg-white sm:mx-10 ">
+                        <p className="p-5 font-medium text-xl">Transactions</p>
+                        <div className="flex justify-end items-center pr-2 gap-3">
+
+                            <DownloadBtn expense={expenses}/>
+
                             <span
                                 onClick={() => setShowModal(true)}
                                 className="p-2 w-30 h-10 text-white bg-blue-800 cursor-pointer rounded-sm"
                             >
                                 + Add Expense
                             </span>
+
                         </div>
                         <Transaction expenses={expenses} />
                     </div>

@@ -158,8 +158,8 @@ function Transaction({ expenses, updateExpenses }) {
     columnHelper.accessor("progress", {
       cell: (info) => (
         <span className="flex gap-2">
-          <Trash size={20} color="red" onClick={() => handleDeleteConfirmation(info.row.original.id)} /> 
-          <PencilIcon size={20} color="black" onClick={() => handleEditItem(info.row.original.id)} />
+          <Trash size={20} color="red" className='cursor-pointer' onClick={() => handleDeleteConfirmation(info.row.original.id)} />
+          <PencilIcon size={20} color="black" className='cursor-pointer' onClick={() => handleEditItem(info.row.original.id)} />
         </span>
       ),
       header: "Action",
@@ -178,68 +178,72 @@ function Transaction({ expenses, updateExpenses }) {
   });
 
   return (
-    <div className="p-1 max-w-5xl mx-auto text-black fill-gray-400">
+    <div className="p-5 w-100 text-black fill-gray-400">
       <DeleteConfirmationModal isOpen={deleteModalOpen} onDelete={handleConfirmDelete} onCancel={handleCancelDelete} />
 
       {/* Conditionally render the EditItemModal */}
       {selectedItem && (
-        <EditItemModal 
-          isOpen={editModalOpen} 
-          onCancel={handleCancelEdit} 
-          onSave={handleSaveEdit} 
-          currentItem={selectedItem} 
+        <EditItemModal
+          isOpen={editModalOpen}
+          onCancel={handleCancelEdit}
+          onSave={handleSaveEdit}
+          currentItem={selectedItem}
         />
       )}
 
-      <div className="flex justify-between mb-2 mx-5">
-        <div className="w-full flex items-center gap-1">
-          <DownloadBtn expense={expense} />
-          <SearchIcon/>
+      <div className="flex justify-between mb-2 ">
+
+        <div className="mt-4 relative w-full flex items-center">
+          <div className='ms-3 absolute'>
+            <SearchIcon /> {/* Adjusted margin */}
+          </div>
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}
-            className="p-2 bg-transparent outline-none  w-full focus:w-1/3 duration-300 "
+            className="rounded-md pl-8 py-2 bg-transparent outline-none w-full focus:w-1/3 duration-300" // Adjusted padding
             placeholder="Search all columns..."
           />
         </div>
       </div>
-      <table className=" w-full text-left">
-        <thead className="bg-white">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className="capitalize px-3.5 py-2">
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row, i) => (
-              <tr
-                key={row.id}
-                className={` ${i % 2 === 0 ? "bg-white   " : "bg-gray-200"} `}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-3.5 py-2">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+      <div className='overflow-x-auto'>
+        <table className=" w-full text-left">
+          <thead className="bg-white">
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className="capitalize px-3.5 py-2">
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </th>
                 ))}
               </tr>
-            ))
-          ) : (
-            <tr className="text-center h-32">
-              <td colSpan={12}>No Record Found!</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-      <div className="flex items-center justify-end mt-2 gap-2">
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.length ? (
+              table.getRowModel().rows.map((row, i) => (
+                <tr
+                  key={row.id}
+                  className={` ${i % 2 === 0 ? "bg-white   " : "bg-gray-200"} `}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} className="px-3.5 py-2">
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr className="text-center h-32">
+                <td colSpan={12}>No Record Found!</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+      <div className="flex items-center justify-end mt-5 gap-2">
         <button
           onClick={() => {
             table.previousPage();
@@ -282,7 +286,7 @@ function Transaction({ expenses, updateExpenses }) {
           onChange={(e) => {
             table.setPageSize(Number(e.target.value));
           }}
-          className="p-2 bg-transparent text-black"
+          className="rounded-md ps-2 p-1 bg-transparent text-black"
         >
           {[10, 20, 30, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
