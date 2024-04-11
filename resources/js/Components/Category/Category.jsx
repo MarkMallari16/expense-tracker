@@ -89,36 +89,42 @@ function Category(props) {
             <div className="border-b-2 px-2 border-[#fafafa] mb-3">
                 <p className="text-xl font-bold">Goals</p>
             </div>
-            <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
-                <div className="flex items-center">
-                    <div className="" onClick={() => setShowModal(true)}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
-                            <span className="text-xl md:text-4xl text-white">+</span>
+            <div className="w-full pb-4 max-h-[300px] overflow-y-auto">
+                <div className="flex flex-col gap-2">
+                    <div className="relative">
+                        <div className="flex items-center ">
+                            <div onClick={() => setShowModal(true)}>
+                                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
+                                    <span className="text-xl md:text-4xl text-white">+</span>
+                                </div>
+                            </div>
+                            <div className="flex-grow py-2 px-2 md:w-2/3">
+                                <p className="text-md font-bold">Add New Goal</p>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex-grow py-2 px-2 md:w-2/3">
-                        <p className="text-md font-bold">Add New Goal</p>
-                    </div>
+
+                    {goals?.map((goal) => (
+                        <div className="flex items-center" key={goal.id} onClick={() => handleGoalClick(goal)}>
+                            <div className="w-fit h-fit rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
+                                <span className="text-4xl w-14 h-14 flex object-cover justify-center cursor-pointer items-center">
+                                    <img className="w-14 h-14 object-cover rounded-full bg-white border-2 " src={`storage/${goal.users_image}`} alt="profile" />
+                                </span>
+                            </div>
+                            <div className="w-36 py-2 px-2">
+                                <p className="text-md font-bold">{goal.name}</p>
+                                <p className="text-xs font-bold">
+                                    ₱{goal.target_amount?.toLocaleString()}
+                                </p>
+                                <p className="text-xs font-bold">
+                                    {formatReadableDate(goal.target_date)}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-                {goals?.map((goal) => (
-                    <div className="flex" key={goal.id} onClick={() => handleGoalClick(goal)}>
-                        <div className="w-fit h-fit rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
-                            <span className="text-4xl w-14 h-14 flex object-cover justify-center cursor-pointer items-center">
-                                <img className="w-14 h-14 object-cover rounded-full" src={`storage/${goal.users_image}`} alt="profile" />
-                            </span>
-                        </div>
-                        <div className="w-36 py-2 px-2">
-                            <p className="text-md font-bold">{goal.name}</p>
-                            <p className="text-xs font-bold">
-                                ₱{goal.target_amount?.toLocaleString()}
-                            </p>
-                            <p className="text-xs font-bold">
-                                {formatReadableDate(goal.target_date)}
-                            </p>
-                        </div>
-                    </div>
-                ))}
             </div>
+
 
             {showModal ? (
                 <>
