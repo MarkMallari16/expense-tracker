@@ -70,36 +70,37 @@ function ExpenseCategory(props) {
     };
 
     return (
-        <div className="w-full mx-auto bg-white h-22  py-2 sm:rounded-md ">
+        <div className="p-4 w-full mx-auto bg-white h-22  py-2 sm:rounded-md ">
             <div className="border-b-2 px-2 border-[#fafafa] mb-3">
                 <p className="text-xl">Category</p>
             </div>
-            <div className="w-full px-2 pb-4 flex gap-2 overflow-x-auto">
-                <div className="flex items-center">
-                    <div className="" onClick={() => setShowModal(true)}>
+            <div className="w-full pb-4 max-h-[300px] overflow-y-auto">
+                <div className="mb-2">
+                    <div className="flex items-center" onClick={() => setShowModal(true)}>
                         <div className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-800 text-white">
                             <span className="text-4xl">+</span>
                         </div>
-
-                    </div>
-                    <div className="w-50 py-2 px-2">
-                        <p className="text-lg font-bold">Add Category</p>
+                        <div className="w-50 py-2 px-2">
+                            <p className="text-md font-bold">Add Category</p>
+                        </div>
                     </div>
                 </div>
                 {expensesCategory?.map((category) => (
-                    <div className="flex" key={category.id} onClick={() => handleGoalClick(category)}>
-                        <div className="w-fit h-fit rounded-full flex items-center justify-center cursor-pointer bg-blue-800">
-                            <span className="text-4xl w-14 h-14 flex object-cover justify-center cursor-pointer items-center">
-                                <img className="w-14 h-14 object-cover rounded-full" src={`${category.users_image}`} alt={category.name} />
-                            </span>
-                        </div>
-                        <div className="w-36 py-2 px-2">
-                            <p className="text-md font-bold">{category.name}</p>
-
+                    <div className=" mb-2" key={category.id} onClick={() => handleGoalClick(category)}>
+                        <div className="flex">
+                            <div className="w-fit h-fit rounded-full flex items-center justify-center cursor-pointer bg-blue-800 ">
+                                <span className="text-4xl w-14 h-14 flex object-cover justify-center cursor-pointer items-center">
+                                    <img className="w-14 h-14 object-cover rounded-full" src={`${category.users_image}`} alt={category.name} />
+                                </span>
+                            </div>
+                            <div className="w-36 py-2 px-2">
+                                <p className="text-md font-bold">{category.name}</p>
+                            </div>
                         </div>
                     </div>
                 ))}
             </div>
+
 
             {showModal ? (
                 <>
