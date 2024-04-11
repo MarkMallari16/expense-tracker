@@ -85,6 +85,7 @@ function Category(props) {
     };
 
     return (
+        //category
         <div className="p-4 w-full mx-auto bg-white h-22  py-2 sm:rounded-md">
             <div className="border-b-2 px-2 border-[#fafafa] mb-3">
                 <p className="text-xl font-bold">Goals</p>
